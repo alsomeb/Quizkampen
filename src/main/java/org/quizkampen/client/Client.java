@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -36,7 +37,11 @@ public class Client extends JFrame implements ActionListener {
     private PrintWriter out;
     private String userName;
 
-    public Client() {
+    public Client() throws IOException {
+        socket = new Socket(serverAdress, port);
+        out = new PrintWriter(socket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
         // Welcome Panel
         loadWelcomePanel();
 
@@ -50,6 +55,11 @@ public class Client extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setTitle("Quizkampen");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+        // Den startar server innan man hinner ge namn, fixa något här!
+        // Kanske ngt protokoll med statisk counter, när 2st spelare är klara så ladda gamePanel
+        listenToServer();
     }
 
     private void loadWelcomePanel() {
@@ -69,9 +79,7 @@ public class Client extends JFrame implements ActionListener {
         welcomePanel.add(startGameBtn);
     }
 
-    private void loadWaitingRoomPanel() throws IOException {
-
-       // socket = new Socket(serverAdress, port);
+    private void loadWaitingRoomPanel() {
 
         mainPanel.removeAll();
         mainPanel.add(waitingRoomPanel);
@@ -84,8 +92,24 @@ public class Client extends JFrame implements ActionListener {
         waitingRoomMsg.setVerticalAlignment(JLabel.CENTER);
     }
 
-    private void setGamePanel(){
+    private void listenToServer() throws IOException {
+        String msgFromServer;
+        while ((msgFromServer = in.readLine()) != null) {
+            System.out.println(msgFromServer);
+            // MESSAGE All players connected
+            if(msgFromServer.equalsIgnoreCase("MESSAGE All players connected")) {
+                loadGamePanel();
+            }
 
+        }
+    }
+
+    private void loadGamePanel(){
+        mainPanel.removeAll();
+        mainPanel.add(gamePanel);
+
+        welcomeMsg.setText("Nu börjar spelet! Lycka till");
+        gamePanel.add(welcomeMsg);
     }
 
     private String prompt(String messageInPrompt) {
@@ -108,20 +132,19 @@ public class Client extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startGameBtn) {
             userName = prompt("Enter player name");
-
             if (userName != null) {
                 // Felhantering görs innan detta nedan
-                try {
-                    loadWaitingRoomPanel();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    throw new RuntimeException(ex);
-                }
+                loadWaitingRoomPanel();
             }
         }
     }
 
     public static void main(String[] args) {
-        new Client();
+        try {
+            new Client();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }
