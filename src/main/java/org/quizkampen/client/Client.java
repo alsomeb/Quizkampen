@@ -17,6 +17,8 @@ Ver 1:
  */
 public class Client extends JFrame implements ActionListener {
 
+
+    private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
     private final JPanel gamePanel = new JPanel();
@@ -39,7 +41,9 @@ public class Client extends JFrame implements ActionListener {
         loadWelcomePanel();
 
         // Frame
-        this.add(welcomePanel);
+        this.add(mainPanel);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(welcomePanel, BorderLayout.CENTER);
         this.setSize(800, 800);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -65,10 +69,14 @@ public class Client extends JFrame implements ActionListener {
         welcomePanel.add(startGameBtn);
     }
 
-    private void setWaitingRoomPanel() throws IOException {
-        socket = new Socket(serverAdress, port);
-        welcomePanel.setVisible(false);
-        this.add(waitingRoomPanel);
+    private void loadWaitingRoomPanel() throws IOException {
+
+       // socket = new Socket(serverAdress, port);
+
+        mainPanel.removeAll();
+        mainPanel.add(waitingRoomPanel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
         waitingRoomPanel.setLayout(new BorderLayout());
         waitingRoomPanel.add(waitingRoomMsg, BorderLayout.CENTER);
         waitingRoomMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
@@ -103,9 +111,8 @@ public class Client extends JFrame implements ActionListener {
 
             if (userName != null) {
                 // Felhantering görs innan detta nedan
-                welcomePanel.setEnabled(false);
                 try {
-                    setWaitingRoomPanel();
+                    loadWaitingRoomPanel();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     throw new RuntimeException(ex);
