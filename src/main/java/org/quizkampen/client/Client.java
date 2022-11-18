@@ -25,7 +25,7 @@ public class Client extends JFrame implements ActionListener {
     private final JPanel gamePanel = new JPanel();
     private final JPanel resultPanel = new JPanel();
 
-    private final JLabel waitingRoomMsg = new JLabel("Waiting for 1 more player to connect..");
+    private final JLabel waitingRoomMsg = new JLabel();
     private final JLabel welcomeMsg = new JLabel("Welcome to Quizkampen!");
     private final JButton startGameBtn = new JButton("Find a game for me");
 
@@ -116,6 +116,8 @@ public class Client extends JFrame implements ActionListener {
         boolean run = true;
         while (run) {
             String name = JOptionPane.showInputDialog(messageInPrompt);
+            userName = name;
+            waitingRoomMsg.setText("Hi "+userName+"! "+ " Waiting for one more player to connect");
             if (name == null) {
                 run = false;
             } else if (name.isBlank()) {
