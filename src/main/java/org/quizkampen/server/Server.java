@@ -10,7 +10,7 @@ public class Server {
     public Server(){
 
         try {
-            ServerSocket serverSocket = new ServerSocket(1234);
+            ServerSocket serverSocket = new ServerSocket(12345);
 
 
         Socket socket = serverSocket.accept();

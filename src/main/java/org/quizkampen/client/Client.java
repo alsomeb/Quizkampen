@@ -76,16 +76,18 @@ public class Client extends JFrame implements ActionListener{
     }
 
     private String prompt(String messageInPrompt) {
-        while (true) {
+        boolean run = true;
+        while (run) {
             String name = JOptionPane.showInputDialog(messageInPrompt);
             if (name == null) {
-                JOptionPane.showMessageDialog(null, "Måste fylla i namn!");
+                run = false;
             } else if (name.isBlank()) {
                 JOptionPane.showMessageDialog(null, "Namn Får ej va tomt!");
             } else {
                 return name;
             }
         }
+        return null;
     }
 
 
@@ -98,13 +100,15 @@ public class Client extends JFrame implements ActionListener{
         if (e.getSource() == startGameBtn) {
             userName = prompt("Enter player name");
 
-            // Felhantering görs innan detta nedan
-            welcomePanel.setEnabled(false);
-            try {
-                setWaitingRoomPanel();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                throw new RuntimeException(ex);
+            if (userName!=null) {
+                // Felhantering görs innan detta nedan
+                welcomePanel.setEnabled(false);
+                try {
+                    setWaitingRoomPanel();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    throw new RuntimeException(ex);
+                }
             }
         }
     }
