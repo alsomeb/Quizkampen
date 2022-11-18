@@ -49,20 +49,20 @@ public class Client extends JFrame implements ActionListener{
     }
 
     private void loadWelcomePanel() {
+        // Panel Layout
+        welcomePanel.setLayout(new GridBagLayout());
 
-        welcomePanel.setLayout(new BorderLayout());
-        welcomePanel.add(welcomeMsg, BorderLayout.NORTH);
+        // Label
+        welcomeMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
 
+        // Button
         startGameBtn.setFocusable(false);
         startGameBtn.setFont(new Font("Sans-serif", Font.BOLD, 22));
-        startGameBtn.setHorizontalAlignment(JButton.CENTER);
-        welcomePanel.add(startGameBtn, BorderLayout.SOUTH);
         startGameBtn.addActionListener(this);
 
-        welcomeMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
-        welcomeMsg.setPreferredSize(new Dimension(1000, 150));
-        welcomeMsg.setHorizontalAlignment(JLabel.CENTER);
-        welcomeMsg.setVerticalAlignment(JLabel.CENTER);
+        welcomePanel.add(welcomeMsg);
+        welcomePanel.add(Box.createHorizontalStrut(15));
+        welcomePanel.add(startGameBtn);
     }
 
     private void setWaitingRoomPanel() throws IOException {
