@@ -91,10 +91,6 @@ public class Client extends JFrame implements ActionListener{
     }
 
 
-    public static void main(String[] args) {
-            new Client();
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startGameBtn) {
@@ -111,5 +107,9 @@ public class Client extends JFrame implements ActionListener{
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Client();
     }
 }
