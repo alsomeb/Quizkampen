@@ -15,7 +15,7 @@ Ver 1:
     - 4 knappar, 1 label
     - Current Score
  */
-public class Client extends JFrame implements ActionListener{
+public class Client extends JFrame implements ActionListener {
 
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
@@ -67,12 +67,17 @@ public class Client extends JFrame implements ActionListener{
 
     private void setWaitingRoomPanel() throws IOException {
         socket = new Socket(serverAdress, port);
-
+        welcomePanel.setVisible(false);
+        this.add(waitingRoomPanel);
         waitingRoomPanel.setLayout(new BorderLayout());
         waitingRoomPanel.add(waitingRoomMsg, BorderLayout.CENTER);
         waitingRoomMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
         waitingRoomMsg.setHorizontalAlignment(JLabel.CENTER);
         waitingRoomMsg.setVerticalAlignment(JLabel.CENTER);
+    }
+
+    private void setGamePanel(){
+
     }
 
     private String prompt(String messageInPrompt) {
@@ -96,7 +101,7 @@ public class Client extends JFrame implements ActionListener{
         if (e.getSource() == startGameBtn) {
             userName = prompt("Enter player name");
 
-            if (userName!=null) {
+            if (userName != null) {
                 // Felhantering görs innan detta nedan
                 welcomePanel.setEnabled(false);
                 try {
