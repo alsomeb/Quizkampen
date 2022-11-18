@@ -5,7 +5,7 @@ import java.awt.*;
 public class CustomColors {
 
     public static final Color BG = new Color(51, 92, 103);
-    public static final Color TEXT = new Color(41, 84, 96);
+    public static final Color TEXT = new Color(15, 13, 52);
 
     public static final Color WRONG = new Color(124, 31, 31);
     public static final Color RIGHT = new Color(48, 110, 58);
