@@ -1,5 +1,7 @@
 package org.quizkampen.client;
 
+import org.quizkampen.client.static_variables.CustomColors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,7 @@ Ver 1:
     - Current Score
  */
 public class Client extends JFrame implements ActionListener {
+
 
 
     private final JPanel mainPanel = new JPanel();
@@ -39,6 +42,7 @@ public class Client extends JFrame implements ActionListener {
     public Client() {
         // Welcome Panel
         loadWelcomePanel();
+
 
         // Frame
         this.add(mainPanel);
