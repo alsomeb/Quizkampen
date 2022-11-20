@@ -1,4 +1,4 @@
-package org.quizkampen.client.static_variables;
+package org.quizkampen.static_variables;
 
 public class CustomSizes {
 

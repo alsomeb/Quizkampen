@@ -1,6 +1,8 @@
 package org.quizkampen.client;
 
-import org.quizkampen.client.static_variables.CustomColors;
+
+
+import org.quizkampen.Swing.timerpanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,7 @@ Ver 1:
 public class Client extends JFrame implements ActionListener {
 
 
-
+    private org.quizkampen.Swing.timerpanel timerpanel=new org.quizkampen.Swing.timerpanel();
     private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
@@ -83,6 +85,7 @@ public class Client extends JFrame implements ActionListener {
         mainPanel.repaint();
         waitingRoomPanel.setLayout(new BorderLayout());
         waitingRoomPanel.add(waitingRoomMsg, BorderLayout.CENTER);
+        waitingRoomPanel.add(timerpanel, BorderLayout.SOUTH);
         waitingRoomMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
         waitingRoomMsg.setHorizontalAlignment(JLabel.CENTER);
         waitingRoomMsg.setVerticalAlignment(JLabel.CENTER);
