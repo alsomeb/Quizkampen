@@ -1,131 +1,55 @@
 package org.quizkampen.client;
 
-import org.quizkampen.client.static_variables.CustomColors;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
+import org.quizkampen.server.Initiator;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-/*
-Ver 1:
-    Ett simpelt bräde i Swing GUI (Client)
-    - 4 knappar, 1 label
-    - Current Score
- */
-public class Client extends JFrame implements ActionListener {
-
-
-
-    private final JPanel mainPanel = new JPanel();
-    private final JPanel welcomePanel = new JPanel();
-    private final JPanel waitingRoomPanel = new JPanel();
-    private final JPanel gamePanel = new JPanel();
-    private final JPanel resultPanel = new JPanel();
-
-    private final JLabel waitingRoomMsg = new JLabel("Waiting for 1 more player to connect..");
-    private final JLabel welcomeMsg = new JLabel("Welcome to Quizkampen!");
-    private final JButton startGameBtn = new JButton("Find a game for me");
-
-    // Network
+public class Client {
+    private QuizGui gui;
     private final int port = 12345;
     private Socket socket;
     private final String serverAdress = "127.0.0.1";
-    private BufferedReader in;
     private PrintWriter out;
-    private String userName;
+    private ObjectInputStream in;
 
-    public Client() {
-        // Welcome Panel
-        loadWelcomePanel();
-
-
-        // Frame
-        this.add(mainPanel);
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(welcomePanel, BorderLayout.CENTER);
-        this.setSize(800, 800);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.setTitle("Quizkampen");
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public Client() throws IOException, ClassNotFoundException {
+        gui = new QuizGui();
+        runClient();
     }
 
-    private void loadWelcomePanel() {
-        // Panel Layout
-        welcomePanel.setLayout(new GridBagLayout());
+    private void runClient() throws IOException, ClassNotFoundException {
+        socket = new Socket(serverAdress, port);
+        out = new PrintWriter(socket.getOutputStream(), true);
+        in = new ObjectInputStream(socket.getInputStream());
 
-        // Label
-        welcomeMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
-
-        // Button
-        startGameBtn.setFocusable(false);
-        startGameBtn.setFont(new Font("Sans-serif", Font.BOLD, 22));
-        startGameBtn.addActionListener(this);
-
-        welcomePanel.add(welcomeMsg);
-        welcomePanel.add(Box.createHorizontalStrut(15));
-        welcomePanel.add(startGameBtn);
+        listenToServer();
     }
 
-    private void loadWaitingRoomPanel() throws IOException {
-
-       // socket = new Socket(serverAdress, port);
-
-        mainPanel.removeAll();
-        mainPanel.add(waitingRoomPanel);
-        mainPanel.revalidate();
-        mainPanel.repaint();
-        waitingRoomPanel.setLayout(new BorderLayout());
-        waitingRoomPanel.add(waitingRoomMsg, BorderLayout.CENTER);
-        waitingRoomMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
-        waitingRoomMsg.setHorizontalAlignment(JLabel.CENTER);
-        waitingRoomMsg.setVerticalAlignment(JLabel.CENTER);
-    }
-
-    private void setGamePanel(){
-
-    }
-
-    private String prompt(String messageInPrompt) {
-        boolean run = true;
-        while (run) {
-            String name = JOptionPane.showInputDialog(messageInPrompt);
-            if (name == null) {
-                run = false;
-            } else if (name.isBlank()) {
-                JOptionPane.showMessageDialog(null, "Namn Får ej va tomt!");
-            } else {
-                return name;
-            }
-        }
-        return null;
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startGameBtn) {
-            userName = prompt("Enter player name");
-
-            if (userName != null) {
-                // Felhantering görs innan detta nedan
-                try {
-                    loadWaitingRoomPanel();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    throw new RuntimeException(ex);
+    private void listenToServer() throws IOException, ClassNotFoundException {
+        Object msgFromServer;
+        while ((msgFromServer = in.readObject()) != null) {
+            if (msgFromServer instanceof Initiator initiator) {
+                if(initiator.allConnected()) {
+                    System.out.println("All connected, game starts");
+                    gui.loadGamePanel();
+                } else {
+                    gui.loadDisconnectMsg();
+                    System.out.println("Other part Disconnected, restart this client");
                 }
             }
         }
     }
 
     public static void main(String[] args) {
-        new Client();
+        try {
+            new Client();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }
