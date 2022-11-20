@@ -30,7 +30,7 @@ public class Client extends JFrame implements ActionListener {
     private final JButton startGameBtn = new JButton("Find a game for me");
 
     // Network
-    private final int port = 12345;
+    private final int port = 12345;///
     private Socket socket;
     private final String serverAdress = "127.0.0.1";
     private BufferedReader in;
