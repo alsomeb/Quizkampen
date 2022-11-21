@@ -26,6 +26,7 @@ public class QuizGui extends JFrame implements ActionListener {
     private final JButton categoryOneButton = new JButton("Category 1");
     private final JButton categoryTwoButton = new JButton("Category 2");
     private final JButton categoryThreeButton = new JButton("Category 3");
+    private final JButton categoryFourButton = new JButton("Category 4");
 
     private final JButton answerButtonOne = new JButton("Answer 1");
     private final JButton answerButtonTwo = new JButton("Answer 2");
@@ -98,15 +99,19 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryPanel.add(categoryOneButton);
         categoryPanel.add(categoryTwoButton);
         categoryPanel.add(categoryThreeButton);
+        categoryPanel.add(categoryFourButton);
 
         Collections.shuffle(categories);
         categoryOneButton.setText(categories.get(0));
         categoryTwoButton.setText(categories.get(1));
         categoryThreeButton.setText(categories.get(2));
+        categoryFourButton.setText(categories.get(3));
+
 
         categoryOneButton.addActionListener(this);
         categoryTwoButton.addActionListener(this);
         categoryThreeButton.addActionListener(this);
+        categoryFourButton.addActionListener(this);
     }
 
     public void loadGamePanel() {
@@ -164,6 +169,7 @@ public class QuizGui extends JFrame implements ActionListener {
     }
 
     public String getResponse() {
+
         return response;
     }
 
@@ -186,6 +192,21 @@ public class QuizGui extends JFrame implements ActionListener {
         }
         if (e.getSource() == categoryOneButton) {
             response = categoryOneButton.getText();
+            outputStream.println(response);
+            System.out.println(response);
+        }
+        if (e.getSource() == categoryTwoButton) {
+            response = categoryTwoButton.getText();
+            outputStream.println(response);
+            System.out.println(response);
+        }
+        if (e.getSource() == categoryThreeButton) {
+            response = categoryThreeButton.getText();
+            outputStream.println(response);
+            System.out.println(response);
+        }
+        if (e.getSource() == categoryFourButton) {
+            response = categoryFourButton.getText();
             outputStream.println(response);
             System.out.println(response);
         }

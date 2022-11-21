@@ -8,19 +8,20 @@ public class Database {
 
     private List<Question> programmering = new ArrayList<>(
             List.of(
-                    new Question("Vad är Java?", "programmering språk", "kaffe", "te", "apa")
+                    new Question("Vad är Java?", "Programmerings språk", "Kaffe", "Te", "Apa")
             )
     );
 
     private List<Question> geografi = new ArrayList<>(
             List.of(
-                    new Question("Vart ligger Sverige?", "här", "mars", "däråt", "ute?")
-            )
+                    new Question("Vart ligger Sverige?", "Här", "Mars", "Däråt", "Ute?"),
+                    new Question("Vilket är världens minsta land?", "Vatikanstaten", "San Marino", "Monaco", "Lichtenstein"),
+                    new Question("Vad heter Kanadas huvudstad", "Ottawa", "Vancouver", "Detroit", "Washington"))
     );
 
     private List<Question> dans = new ArrayList<>(
             List.of(
-                    new Question("Vad är en karuchi?", "springa in i väggen", "folkdans", "te", "apa")
+                    new Question("Vad är en Karuchi?", "Springa in i väggen", "Folkdans", "Te", "Apa")
             )
     );
 
@@ -31,6 +32,7 @@ public class Database {
     );
 
     public List<String> getCategories() {
+
         return categories;
     }
 
