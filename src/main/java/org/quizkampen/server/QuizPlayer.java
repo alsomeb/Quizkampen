@@ -41,7 +41,6 @@ public class QuizPlayer {
 
         try {
             message = in.readLine();
-            System.out.println(message);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

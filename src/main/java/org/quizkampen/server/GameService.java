@@ -8,11 +8,8 @@ public class GameService extends Thread{
     private QuizPlayer quizPlayer1;
     private QuizPlayer quizPlayer2;
 
-    private boolean player1Turn;
-    private final int INITIAL = 0;
-    private final int SENDCATEGORIES = 1;
-    private final int SENDQUESTION = 2;
-    private int state = INITIAL;
+    private int currentPlayer = 1;
+    private int state = 0;
 
     // Ladda antal frågor osv
 
@@ -37,33 +34,73 @@ public class GameService extends Thread{
         return true;
     }
 
+/*
+    private String processInput(QuizPlayer quizPlayer) {
+        String fromClient = null;
+
+*/
+/*        if(state == SENDCATEGORIES) {
+            quizPlayer1.sendResponseToClient(new Response(db.getCategories()));
+            String category = quizPlayer1.receiveFromClient();
+            if(category != null) {
+                System.out.println(category);
+                state = SENDQUESTION;
+                System.out.println("testar state initial");
+            }
+        } else if (state == SENDQUESTION) {
+            System.out.println("Skickar frågor");
+        }
+
+        return fromClient;*//*
+
+    }
+
+*/
 
 
     @Override
     public void run() {
         if(checkAllConnected()) {
-            if(state == INITIAL) {
-                quizPlayer1.sendResponseToClient(new Initiator(true));
-                quizPlayer2.sendResponseToClient(new Initiator(true));
-                state = SENDCATEGORIES;
-                player1Turn = true;
-                System.out.println("testar state initial");
-            }
+            String msgFromClient = "";
 
-            while (player1Turn) {
-                if(state == SENDCATEGORIES) {
+            while (true) {
+                if (state == 0) {
+                    System.out.println("Startar state 0");
+                    quizPlayer1.sendResponseToClient(new Initiator(true));
+                    quizPlayer2.sendResponseToClient(new Initiator(true));
+                    state++;
+                    System.out.println("testar state initial");
+                }
+
+                if (state == 1) {
+                    System.out.println("Startar state 1");
                     quizPlayer1.sendResponseToClient(new Response(db.getCategories()));
-                    String category = quizPlayer1.receiveFromClient();
-                    if(category != null) {
-                        System.out.println(category);
-                        state = SENDQUESTION;
-                        System.out.println("testar state initial");
+                    quizPlayer1.sendResponseToClient("Skickat kategorier");
+                    System.out.println("Skickat kategorier");
+                    state++;
+                }
+
+                if(state == 2) {
+                    System.out.println("Startar state 2");
+                    msgFromClient = quizPlayer1.receiveFromClient();
+                    System.out.println(msgFromClient);
+                    state++;
+                }
+
+                if(state == 3) {
+                    msgFromClient = msgFromClient.toLowerCase();
+                    System.out.println("Startar state 3");
+                    switch (msgFromClient) {
+                        case "dans" -> db.getDans().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
+                        case "programmering" -> db.getProgrammering().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
+                        case "geografi" -> db.getGeografi().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
+                        case "hundar" -> db.getHundar().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
                     }
+                    state++;
                 }
-                if(state == SENDQUESTION) {
-                    System.out.println("Skickar frågor");
-                }
-                player1Turn = false;
+
+
+
             }
         }
     }

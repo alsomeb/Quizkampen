@@ -24,12 +24,13 @@ public class Client {
         socket = new Socket(serverAdress, port);
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new ObjectInputStream(socket.getInputStream());
-
+        gui.setOutputStream(out);
         listenToServer();
     }
 
     private void listenToServer() throws IOException, ClassNotFoundException {
         Object msgFromServer;
+
         while ((msgFromServer = in.readObject()) != null) {
             if (msgFromServer instanceof Initiator initiator) {
                 if(initiator.allConnected()) {
@@ -48,8 +49,16 @@ public class Client {
                     gui.loadCategoryPanel();
                     System.out.println(response.getCategories());
                 }
-            }
 
+                if (response.getQuestion() != null) {
+                    // +++++++++++++++++++++++++++++++++++
+                    System.out.println(response.getQuestion().getQuestionText());
+                    // Label = response.getQuestion().getQuestionText()
+                Collections.shuffle(response.getQuestion().getAnswers());
+                    System.out.println(response.getQuestion().getAnswers());
+
+                }
+            }
         }
     }
 

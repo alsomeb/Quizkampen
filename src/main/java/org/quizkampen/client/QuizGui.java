@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +34,8 @@ public class QuizGui extends JFrame implements ActionListener {
 
     private List<String> categories;
 
-    private boolean hasChosenCategory = false;
+    private PrintWriter outputStream;
+
 
     private String response;
 
@@ -169,12 +171,12 @@ public class QuizGui extends JFrame implements ActionListener {
         this.response = response;
     }
 
-    public boolean hasChosenCategory() {
-        return hasChosenCategory;
+    public PrintWriter getOutputStream() {
+        return outputStream;
     }
 
-    public void setHasChosenCategory(boolean hasChosenCategory) {
-        this.hasChosenCategory = hasChosenCategory;
+    public void setOutputStream(PrintWriter outputStream) {
+        this.outputStream = outputStream;
     }
 
     @Override
@@ -183,9 +185,9 @@ public class QuizGui extends JFrame implements ActionListener {
             loadWaitingRoomPanel();
         }
         if (e.getSource() == categoryOneButton) {
-            hasChosenCategory = true;
             response = categoryOneButton.getText();
-
+            outputStream.println(response);
+            System.out.println(response);
         }
 /*            System.out.println(categoryOneButton.getText());
             String temp = "";

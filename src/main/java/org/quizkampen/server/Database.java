@@ -6,25 +6,25 @@ import java.util.List;
 public class Database {
     private final List<String> categories = new ArrayList<>(List.of("Programmering", "Geografi", "Dans","Hundar"));
 
-    List<Question> programmering = new ArrayList<>(
+    private List<Question> programmering = new ArrayList<>(
             List.of(
                     new Question("Vad är Java?", "programmering språk", "kaffe", "te", "apa")
             )
     );
 
-    List<Question> geografi = new ArrayList<>(
+    private List<Question> geografi = new ArrayList<>(
             List.of(
                     new Question("Vart ligger Sverige?", "här", "mars", "däråt", "ute?")
             )
     );
 
-    List<Question> dans = new ArrayList<>(
+    private List<Question> dans = new ArrayList<>(
             List.of(
                     new Question("Vad är en karuchi?", "springa in i väggen", "folkdans", "te", "apa")
             )
     );
 
-    List<Question> hundar = new ArrayList<>(
+    private List<Question> hundar = new ArrayList<>(
             List.of(
                     new Question("vilken hund ser ut som en korv", "tax", "labrador", "bulldog", "rottweiler")
             )
@@ -34,8 +34,23 @@ public class Database {
         return categories;
     }
 
+    public List<Question> getProgrammering() {
+        return programmering;
+    }
 
-/*   private final List<String> fåglarFrågor = new ArrayList<>(List.of("Vilken fråga är rätt?", "svarar du rätt?"));
+    public List<Question> getGeografi() {
+        return geografi;
+    }
+
+    public List<Question> getDans() {
+        return dans;
+    }
+
+    public List<Question> getHundar() {
+        return hundar;
+    }
+
+    /*   private final List<String> fåglarFrågor = new ArrayList<>(List.of("Vilken fråga är rätt?", "svarar du rätt?"));
     private final List<String> programmeringFrågor = new ArrayList<>(List.of("Vilken fråga är rätt?", "svarar du rätt?"));
     private final List<String> cycklarFrågor = new ArrayList<>(List.of("Vilken fråga är rätt?", "svarar du rätt?"));
     private final List<String> landFrågor = new ArrayList<>(List.of("Vilken fråga är rätt?", "svarar du rätt?"));
