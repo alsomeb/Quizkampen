@@ -34,7 +34,8 @@ public class Client {
             if (msgFromServer instanceof Initiator initiator) {
                 if(initiator.allConnected()) {
                     System.out.println("All connected, game starts");
-                    gui.loadGamePanel();
+                    gui.loadWaitingRoomPanel();
+                    gui.setWaitingRoomMsg("Waiting for your turn");
                 } else {
                     gui.loadDisconnectMsg();
                     System.out.println("Other part Disconnected, restart this client");
