@@ -14,7 +14,6 @@ public class ServerListener {
             try {
             GameService gameService = new GameService(serverSocket.accept(), serverSocket.accept());
             gameService.start();
-
             } catch (IOException e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);

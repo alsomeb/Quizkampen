@@ -1,5 +1,6 @@
 package org.quizkampen.client;
 import org.quizkampen.server.Initiator;
+import org.quizkampen.server.Response;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,6 +40,15 @@ public class Client {
                     System.out.println("Other part Disconnected, restart this client");
                 }
             }
+
+            if(msgFromServer instanceof Response response) {
+                if(response.getCategories() != null) {
+                    gui.setCategories(response.getCategories());
+                    gui.loadCategoryPanel();
+                    System.out.println(response.getCategories());
+                }
+            }
+
         }
     }
 

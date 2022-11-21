@@ -10,12 +10,14 @@ public class QuizPlayer {
     private Socket socket;
     private ObjectOutputStream out;
     private BufferedReader in;
+    private GameService gameService;
 
     private int currentScore;
     private int totalScore;
 
-    public QuizPlayer(Socket socket) {
+    public QuizPlayer(Socket socket, GameService gameService) {
         this.socket = socket;
+        this.gameService = gameService;
 
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -32,6 +34,19 @@ public class QuizPlayer {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public String receiveFromClient() {
+        String message = "";
+
+        try {
+            message = in.readLine();
+            System.out.println(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return message;
     }
 
     public Socket getSocket() {
