@@ -1,6 +1,7 @@
 package org.quizkampen.server;
 
 import java.net.Socket;
+import java.util.function.DoubleToIntFunction;
 
 public class GameService extends Thread{
 
