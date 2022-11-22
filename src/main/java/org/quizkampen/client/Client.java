@@ -51,14 +51,10 @@ public class Client {
                     gui.loadCategoryPanel();
                     System.out.println(response.getCategories());
                 }
-
-                if (response.getQuestion() != null) {
-                    // +++++++++++++++++++++++++++++++++++
-                    System.out.println(response.getQuestion().getQuestionText());
-                    // Label = response.getQuestion().getQuestionText()
-                Collections.shuffle(response.getQuestion().getAnswers());
-                    System.out.println(response.getQuestion().getAnswers());
-
+                if (response.getQuestions() != null) {
+                    System.out.println(response.getQuestions());
+                    gui.setCurrentQuestions(response.getQuestions());
+                    gui.loadGamePanel();
                 }
             }
         }
