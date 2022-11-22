@@ -23,6 +23,7 @@ public class QuizGui extends JFrame implements ActionListener {
     private final JPanel resultPanel = new JPanel();
 
     private JLabel waitingRoomMsg = new JLabel("Waiting for 1 more player");
+    private JLabel questionLabel = new JLabel();
     private final JLabel welcomeMsg = new JLabel("Welcome to Quizkampen!");
     private final JButton startGameBtn = new JButton("Find a game for me");
 
@@ -202,13 +203,17 @@ public class QuizGui extends JFrame implements ActionListener {
             outputStream.println(response);
             System.out.println(response);
         }
-/*            System.out.println(categoryOneButton.getText());
-            String temp = "";
-            temp = categoryOneButton.getText();
-            loadGamePanel();
-            Collections.shuffle(getCategories());
-            answerButtonOne.setText("");*/
+
+        if (currentQuestions != null) {
+            String currentRightAnswer = currentQuestions.getCurrentQuestions().get(questionCounter).getRightAnswer();
+            if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
+                System.out.println("Du svara rätt!");
+            } else {
+                System.out.println("Nej");
+            }
+
         }
+    }
 
 }
 
