@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Collections;
+
 
 public class Client {
     private QuizGui gui;
@@ -25,6 +25,7 @@ public class Client {
         socket = new Socket(serverAdress, port);
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new ObjectInputStream(socket.getInputStream());
+        // lägger in PrintWriter i GUI så vi kan skicka där på actionListener
         gui.setOutputStream(out);
         listenToServer();
     }

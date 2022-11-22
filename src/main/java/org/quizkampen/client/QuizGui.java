@@ -1,5 +1,8 @@
 package org.quizkampen.client;
 
+import org.quizkampen.server.Question;
+import org.quizkampen.server.Questions;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,21 +31,20 @@ public class QuizGui extends JFrame implements ActionListener {
     private final JButton categoryThreeButton = new JButton("Category 3");
     private final JButton categoryFourButton = new JButton("Category 4");
 
-    private final JButton answerButtonOne = new JButton("Answer 1");
-    private final JButton answerButtonTwo = new JButton("Answer 2");
-    private final JButton answerButtonThree = new JButton("Answer 3");
-    private final JButton answerButtonFour = new JButton("Answer 4");
-
     private List<String> categories;
 
     private PrintWriter outputStream;
 
 
+    private Questions currentQuestions;
+
+    private int questionCounter;
+    private int totalQuestions; // TODO ANVÄND PROPERTY VAR HÄR SOM STANNAR EFTER X ANTAL
+
     private String response;
 
     public QuizGui() {
         categories = new ArrayList<>();
-
 
         // Welcome Panel
         loadWelcomePanel();
@@ -121,17 +123,28 @@ public class QuizGui extends JFrame implements ActionListener {
         welcomeMsg.setText("Game starts now!");
         gamePanel.setLayout(new GridBagLayout());
 
-        gamePanel.add(welcomeMsg);
-        gamePanel.add(answerButtonOne);
-        gamePanel.add(answerButtonTwo);
-        gamePanel.add(answerButtonThree);
-        gamePanel.add(answerButtonFour);
-        answerButtonOne.addActionListener(this);
-        answerButtonTwo.addActionListener(this);
-        answerButtonThree.addActionListener(this);
-        answerButtonFour.addActionListener(this);
-        repaint();
-        revalidate();
+        // Fråga Text
+        List<Question> allQuestions = currentQuestions.getCurrentQuestions();
+        String questionText = allQuestions.get(questionCounter).getQuestionText();
+        questionLabel.setText(questionText);
+        gamePanel.add(questionLabel);
+
+        // Alternativ Listan
+        List<String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
+        Collections.shuffle(allaAlternativ);
+
+        // Loopar igenom alla alternativ och målar upp knapparna
+        for (int i = 0; i < allaAlternativ.size(); i++) {
+            JButton alternativBtn = new JButton();
+            alternativBtn.setText(allaAlternativ.get(i));
+            alternativBtn.addActionListener(this);
+            gamePanel.add(alternativBtn);
+            System.out.println("Lägger till knapp: " + allaAlternativ.get(i));
+            repaint();
+            revalidate();
+        }
+
+        // TODO VI KANSKE BEHÖVER RÄTTA SVARET SOM GLOBAL VARIABEL, FÖR ATT KOMMA ÅT DEN I LYSSNAREN
     }
 
     public void loadDisconnectMsg() {
@@ -140,52 +153,32 @@ public class QuizGui extends JFrame implements ActionListener {
         startGameBtn.setVisible(false);
     }
 
-    public List<String> getCategories() {
-        return categories;
-    }
-
     public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 
-    public JLabel getWaitingRoomMsg() {
-        return waitingRoomMsg;
-    }
 
     public void setWaitingRoomMsg(String waitingRoomMsg) {
         this.waitingRoomMsg.setText(waitingRoomMsg);
     }
 
-    public JButton getCategoryOneButton() {
-        return categoryOneButton;
-    }
-
-    public JButton getCategoryTwoButton() {
-        return categoryTwoButton;
-    }
-
-    public JButton getCategoryThreeButton() {
-        return categoryThreeButton;
-    }
-
-    public String getResponse() {
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    public PrintWriter getOutputStream() {
-        return outputStream;
-    }
 
     public void setOutputStream(PrintWriter outputStream) {
         this.outputStream = outputStream;
     }
 
+    public Questions getCurrentQuestions() {
+        return currentQuestions;
+    }
+
+    public void setCurrentQuestions(Questions currentQuestions) {
+        this.currentQuestions = currentQuestions;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        JButton selectedBtn = (JButton) e.getSource();
+
         if (e.getSource() == startGameBtn) {
             loadWaitingRoomPanel();
         }

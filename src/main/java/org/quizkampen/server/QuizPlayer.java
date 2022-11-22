@@ -11,7 +11,6 @@ public class QuizPlayer {
     private ObjectOutputStream out;
     private BufferedReader in;
     private GameService gameService;
-
     private int currentScore;
     private int totalScore;
 
@@ -54,5 +53,21 @@ public class QuizPlayer {
 
     public ObjectOutputStream getOut() {
         return out;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 }

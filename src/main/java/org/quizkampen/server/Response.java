@@ -6,21 +6,23 @@ import java.util.List;
 public class Response implements Serializable {
     private List<String> categories;
 
-    private Question question;
+    private Questions questions;
 
     public Response(List<String> categories) {
         this.categories = categories;
     }
 
-    public Response(Question question) {
-        this.question = question;
+    public Response(Questions questions) {
+        this.questions = questions;
+    }
+
+    public Questions getQuestions() {
+        return questions;
     }
 
     public List<String> getCategories() {
         return categories;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
+
 }

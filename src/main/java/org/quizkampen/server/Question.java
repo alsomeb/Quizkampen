@@ -29,4 +29,13 @@ public class Question implements Serializable {
     public ArrayList<String> getAnswers() {
         return answers;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionText='" + questionText + '\'' +
+                ", rightAnswer='" + rightAnswer + '\'' +
+                ", answers=" + answers +
+                '}';
+    }
 }

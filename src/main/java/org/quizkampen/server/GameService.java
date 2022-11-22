@@ -1,7 +1,6 @@
 package org.quizkampen.server;
 
 import java.net.Socket;
-import java.util.function.DoubleToIntFunction;
 
 public class GameService extends Thread{
 
@@ -35,30 +34,6 @@ public class GameService extends Thread{
         return true;
     }
 
-/*
-    private String processInput(QuizPlayer quizPlayer) {
-        String fromClient = null;
-
-*/
-/*        if(state == SENDCATEGORIES) {
-            quizPlayer1.sendResponseToClient(new Response(db.getCategories()));
-            String category = quizPlayer1.receiveFromClient();
-            if(category != null) {
-                System.out.println(category);
-                state = SENDQUESTION;
-                System.out.println("testar state initial");
-            }
-        } else if (state == SENDQUESTION) {
-            System.out.println("Skickar frågor");
-        }
-
-        return fromClient;*//*
-
-    }
-
-*/
-
-
     @Override
     public void run() {
         if(checkAllConnected()) {
@@ -90,18 +65,18 @@ public class GameService extends Thread{
 
                 if(state == 3) {
                     msgFromClient = msgFromClient.toLowerCase();
-                    System.out.println("Startar state 3");
+                    System.out.println("Startar state 3, skickar Frågor till player 1");
                     switch (msgFromClient) {
-                        case "dans" -> db.getDans().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
-                        case "programmering" -> db.getProgrammering().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
-                        case "geografi" -> db.getGeografi().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
-                        case "hundar" -> db.getHundar().forEach(question -> quizPlayer1.sendResponseToClient(new Response(question)));
+                        case "litteraturkonst" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
+                        case "programmering" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
+                        case "geografi" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
+                        case "historia" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
                     }
                     state++;
                 }
-
-
-
+                // TODO HITTA PÅ ETT BRA SÄTT ATT RÄKNA IHOP FULLSTÄNDIG POÄNG FÖR PLAYER 1
+                // TODO STARTA PLAYER 2, SÄTT PLAYER 1 I WAITING PANEL
+                // TODO Sätta kanske hela protokollet i en metod med en Player som in parameter
             }
         }
     }
