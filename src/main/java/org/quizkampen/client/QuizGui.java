@@ -169,7 +169,6 @@ public class QuizGui extends JFrame implements ActionListener {
     }
 
     public String getResponse() {
-
         return response;
     }
 
