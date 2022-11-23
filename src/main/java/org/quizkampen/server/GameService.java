@@ -130,8 +130,6 @@ public class GameService extends Thread {
 
             activePlayer = quizPlayer2;
             nonActivePlayer = quizPlayer1;
-
-
             gameLoop(activePlayer, amountOfRounds);
 
             // Skicka res till båda spelare och ge dem resultPanel, spela igen ?
