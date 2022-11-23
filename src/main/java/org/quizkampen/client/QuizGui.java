@@ -125,6 +125,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void loadGamePanel() {
         mainPanel.removeAll();
+        gamePanel.removeAll();
         mainPanel.add(gamePanel, BorderLayout.SOUTH);
         mainPanel.add(questionLabel, BorderLayout.CENTER);
 
