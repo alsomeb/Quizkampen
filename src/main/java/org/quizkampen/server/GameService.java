@@ -43,7 +43,7 @@ public class GameService extends Thread {
         String msgFromClient = "";
         QuizPlayer previousPlayer = null;
 
-        while (true) {
+        while (currentRound <= amountOfRounds) {
             if (state == 0) {
                 System.out.println("Startar state 0");
                 quizPlayer1.sendResponseToClient(new Initiator(true));
@@ -69,9 +69,9 @@ public class GameService extends Thread {
             }
 
             if (state == 3) {
-                if (previousPlayer == null) {
+                if (!roundOver) { //nonActivePlayer == null
                     msgFromClient = msgFromClient.toLowerCase();
-                    System.out.println("Startar state 3, skickar Frågor till player 1");
+                    System.out.println("Startar state 3, skickar Frågor till spelaren");
                     switch (msgFromClient) {
                         case "litteraturkonst" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
                         case "programmering" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
@@ -79,7 +79,7 @@ public class GameService extends Thread {
                         case "historia" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
                     }
                 } else {
-                    switch (previousPlayer.getLastChosenCategory()) {
+                    switch (nonActivePlayer.getLastChosenCategory()) {
                         case "litteraturkonst" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
                         case "programmering" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
                         case "geografi" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
@@ -106,6 +106,8 @@ public class GameService extends Thread {
                     activePlayer = quizPlayer2; // KAN INT EVAR PLAYER 2 utan
                     state = 3;
                     roundOver = true;
+                    currentRound++; // TODO annat ställe kanske ?
+                    System.out.println(currentRound);
                 }
             }
         }
