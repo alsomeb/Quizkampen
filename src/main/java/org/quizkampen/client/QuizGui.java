@@ -21,10 +21,9 @@ public class QuizGui extends JFrame implements ActionListener {
     private final JPanel gamePanel = new JPanel();
     private final JPanel resultPanel = new JPanel();
 
-    private JLabel waitingRoomMsg = new JLabel("Waiting for 1 more player");
-    private JLabel questionLabel = new JLabel();
-
-    private final JLabel welcomeMsg = new JLabel("Welcome to Quizkampen!");
+    private final JLabel textLabelOne = new JLabel("Waiting for 1 more player");
+    private final JLabel textLabelTwo = new JLabel("Welcome to Quizkampen!");
+    private final JLabel questionLabel = new JLabel();
     private final JButton startGameBtn = new JButton("Find a game for me");
 
     private final JButton categoryOneButton = new JButton("Category 1");
@@ -69,13 +68,13 @@ public class QuizGui extends JFrame implements ActionListener {
         // Panel Layout
         welcomePanel.setLayout(new GridBagLayout());
         // Label
-        welcomeMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        textLabelTwo.setFont(new Font("Sans-serif", Font.BOLD, 22));
         // Button
         startGameBtn.setFocusable(false);
         startGameBtn.setFont(new Font("Sans-serif", Font.BOLD, 22));
         startGameBtn.addActionListener(this);
 
-        welcomePanel.add(welcomeMsg);
+        welcomePanel.add(textLabelTwo);
         welcomePanel.add(startGameBtn);
     }
 
@@ -85,10 +84,23 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.revalidate();
         mainPanel.repaint();
         waitingRoomPanel.setLayout(new BorderLayout());
-        waitingRoomPanel.add(waitingRoomMsg, BorderLayout.CENTER);
-        waitingRoomMsg.setFont(new Font("Sans-serif", Font.BOLD, 22));
-        waitingRoomMsg.setHorizontalAlignment(JLabel.CENTER);
-        waitingRoomMsg.setVerticalAlignment(JLabel.CENTER);
+        waitingRoomPanel.add(textLabelOne, BorderLayout.CENTER);
+        textLabelOne.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        textLabelOne.setHorizontalAlignment(JLabel.CENTER);
+        textLabelOne.setVerticalAlignment(JLabel.CENTER);
+    }
+    public void loadResultPanel(){
+        mainPanel.removeAll();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(resultPanel, BorderLayout.CENTER);
+        textLabelTwo.setText("Result player 1:  " + playerScore.get(0));
+        textLabelOne.setText("Result player 2:  " + playerScore.get(1));
+        resultPanel.add(textLabelTwo);
+        resultPanel.add(textLabelOne);
+        textLabelTwo.setHorizontalAlignment(JLabel.CENTER);
+        textLabelOne.setHorizontalAlignment(JLabel.CENTER);
+        revalidate();
+        repaint();
     }
 
     public void loadCategoryPanel() {
@@ -96,9 +108,9 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.removeAll();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(categoryPanel, BorderLayout.CENTER);
-        mainPanel.add(welcomeMsg, BorderLayout.NORTH);
-        welcomeMsg.setText("Välj en kategori");
-        welcomeMsg.setHorizontalAlignment(JLabel.CENTER);
+        mainPanel.add(textLabelTwo, BorderLayout.NORTH);
+        textLabelTwo.setText("Välj en kategori");
+        textLabelTwo.setHorizontalAlignment(JLabel.CENTER);
 
         categoryPanel.setLayout(new GridBagLayout());
         categoryPanel.add(categoryOneButton);
@@ -131,7 +143,7 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.add(gamePanel, BorderLayout.SOUTH);
         mainPanel.add(questionLabel, BorderLayout.CENTER);
 
-        welcomeMsg.setText("Game starts now!");
+        textLabelTwo.setText("Game starts now!");
         gamePanel.setLayout(new GridBagLayout());
 
         // Fråga Text
@@ -162,8 +174,8 @@ public class QuizGui extends JFrame implements ActionListener {
     }
 
     public void loadDisconnectMsg() {
-        welcomeMsg.setText("The other player disconnected during game start, please restart");
-        welcomeMsg.setForeground(Color.RED);
+        textLabelTwo.setText("The other player disconnected during game start, please restart");
+        textLabelTwo.setForeground(Color.RED);
         startGameBtn.setVisible(false);
     }
 
@@ -185,7 +197,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
 
     public void setWaitingRoomMsg(String waitingRoomMsg) {
-        this.waitingRoomMsg.setText(waitingRoomMsg);
+        this.textLabelOne.setText(waitingRoomMsg);
     }
 
 
