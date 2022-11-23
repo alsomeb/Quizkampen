@@ -15,6 +15,6 @@ public class CustomColors {
     public static final Color DARK = new Color(35, 69, 79);
 
     public static final Color BUTTON_ROLL_OVER = new Color(41, 84, 96);
-    public static final Color BUTTON_PRESSED = new Color(51, 105, 119);
+    public static final Color BUTTON_PRESSED = new Color(54, 112, 128);
     public static final Color BUTTON_BORDER = new Color(23, 45, 52);
 }
