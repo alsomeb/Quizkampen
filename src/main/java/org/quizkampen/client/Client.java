@@ -1,4 +1,5 @@
 package org.quizkampen.client;
+
 import org.quizkampen.server.Initiator;
 import org.quizkampen.server.Response;
 
@@ -35,7 +36,7 @@ public class Client {
 
         while ((msgFromServer = in.readObject()) != null) {
             if (msgFromServer instanceof Initiator initiator) {
-                if(initiator.allConnected()) {
+                if (initiator.allConnected()) {
                     System.out.println("All connected, game starts");
                     gui.loadWaitingRoomPanel();
                     gui.setWaitingRoomMsg("Waiting for your turn");
@@ -45,8 +46,8 @@ public class Client {
                 }
             }
 
-            if(msgFromServer instanceof Response response) {
-                if(response.getCategories() != null) {
+            if (msgFromServer instanceof Response response) {
+                if (response.getCategories() != null) {
                     gui.setCategories(response.getCategories());
                     gui.loadCategoryPanel();
                     System.out.println(response.getCategories());

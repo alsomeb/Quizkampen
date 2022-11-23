@@ -10,6 +10,7 @@ public enum DbEnum {
     private final String category;
 
     DbEnum(String typ) {
+
         this.category = typ;
     }
 

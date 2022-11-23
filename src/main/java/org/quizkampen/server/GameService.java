@@ -2,7 +2,7 @@ package org.quizkampen.server;
 
 import java.net.Socket;
 
-public class GameService extends Thread{
+public class GameService extends Thread {
 
     private Database db = new Database();
     private QuizPlayer quizPlayer1;
@@ -13,7 +13,7 @@ public class GameService extends Thread{
 
     // Ladda antal frågor osv
 
-    public GameService(Socket player1Socket, Socket player2Socket){
+    public GameService(Socket player1Socket, Socket player2Socket) {
         quizPlayer1 = new QuizPlayer(player1Socket, this);
         quizPlayer2 = new QuizPlayer(player2Socket, this);
         System.out.println(player1Socket.getInetAddress().getHostAddress() + " Connected");
@@ -21,7 +21,7 @@ public class GameService extends Thread{
     }
 
     private boolean checkAllConnected() {
-        if(quizPlayer1.getOut() == null) {
+        if (quizPlayer1.getOut() == null) {
             quizPlayer2.sendResponseToClient(new Initiator(false));
             return false;
         }
@@ -36,7 +36,7 @@ public class GameService extends Thread{
 
     @Override
     public void run() {
-        if(checkAllConnected()) {
+        if (checkAllConnected()) {
             String msgFromClient = "";
 
             while (true) {
@@ -56,21 +56,25 @@ public class GameService extends Thread{
                     state++;
                 }
 
-                if(state == 2) {
+                if (state == 2) {
                     System.out.println("Startar state 2");
                     msgFromClient = quizPlayer1.receiveFromClient();
                     System.out.println(msgFromClient);
                     state++;
                 }
 
-                if(state == 3) {
+                if (state == 3) {
                     msgFromClient = msgFromClient.toLowerCase();
                     System.out.println("Startar state 3, skickar Frågor till player 1");
                     switch (msgFromClient) {
-                        case "litteraturkonst" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
-                        case "programmering" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
-                        case "geografi" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
-                        case "historia" -> quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
+                        case "litteraturkonst" ->
+                                quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
+                        case "programmering" ->
+                                quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
+                        case "geografi" ->
+                                quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
+                        case "historia" ->
+                                quizPlayer1.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
                     }
                     state++;
                 }

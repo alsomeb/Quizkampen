@@ -18,8 +18,8 @@ public class Questions implements Serializable {
     }
 
     private void setProgrammingQuestions() {
-        currentQuestions.add(new Question("Vad är Java?", "Programmerings språk", "Kaffe",
-                "Te", "Apa"));
+        currentQuestions.add(new Question("Vad är JavaScript?", "Programmerings språk", "Kaffe",
+                "En molntjänst", "Ett virus"));
         currentQuestions.add(new Question("Vad är en algoritm?", "En serie av instruktion",
                 "Ett språk", "Ett mattetal", "En robot"));
         currentQuestions.add(new Question("Vem anses som världens första programmerare?",

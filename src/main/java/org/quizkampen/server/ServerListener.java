@@ -12,8 +12,8 @@ public class ServerListener {
         serverSocket = new ServerSocket(port);
         while (true) {
             try {
-            GameService gameService = new GameService(serverSocket.accept(), serverSocket.accept());
-            gameService.start();
+                GameService gameService = new GameService(serverSocket.accept(), serverSocket.accept());
+                gameService.start();
             } catch (IOException e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);

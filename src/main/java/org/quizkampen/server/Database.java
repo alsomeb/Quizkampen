@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-    private final List<String> categories = new ArrayList<>(List.of("Programmering", "Geografi", "Litteraturkonst","Historia"));
+    private final List<String> categories = new ArrayList<>(List.of("Programmering", "Geografi", "Litteraturkonst", "Historia"));
 
     private Questions questions;
 
