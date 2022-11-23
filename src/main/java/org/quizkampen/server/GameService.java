@@ -8,6 +8,8 @@ public class GameService extends Thread {
     private QuizPlayer quizPlayer1;
     private QuizPlayer quizPlayer2;
     private QuizPlayer activePlayer;
+    private QuizPlayer nonActivePlayer;
+
     private int state = 0;
 
     private int amountOfRounds = 2;
@@ -41,7 +43,7 @@ public class GameService extends Thread {
         int currentRound = 0;
         boolean roundOver = false;
         String msgFromClient = "";
-        QuizPlayer previousPlayer = null;
+        QuizPlayer tempPlayer;
 
         while (currentRound <= amountOfRounds) {
             if (state == 0) {
@@ -102,8 +104,10 @@ public class GameService extends Thread {
 
                 if (msgFromClient.equalsIgnoreCase("switch") && !roundOver) {
                     System.out.println(msgFromClient);
-                    previousPlayer = activePlayer;
-                    activePlayer = quizPlayer2; // KAN INT EVAR PLAYER 2 utan
+                    // Mellan lagring
+                    tempPlayer = nonActivePlayer;
+                    nonActivePlayer = activePlayer;
+                    activePlayer = tempPlayer;
                     state = 3;
                     roundOver = true;
                     currentRound++; // TODO annat ställe kanske ?
@@ -118,7 +122,21 @@ public class GameService extends Thread {
     public void run() {
         if (checkAllConnected()) {
             activePlayer = quizPlayer1;
+            nonActivePlayer = quizPlayer2;
             gameLoop(activePlayer, amountOfRounds);
+
+            System.out.println("Spelare 2 tur");
+            // byt skärm för pl 2
+
+            activePlayer = quizPlayer2;
+            nonActivePlayer = quizPlayer1;
+
+
+            gameLoop(activePlayer, amountOfRounds);
+
+            // Skicka res till båda spelare och ge dem resultPanel, spela igen ?
+            System.out.println("spel slut");
+
         }
             /*String msgFromClient = "";
 
