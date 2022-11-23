@@ -43,9 +43,12 @@ public class QuizGui extends JFrame implements ActionListener {
     private int totalQuestions;
     private String response;
 
+    private List<Integer> playerScore;
+
     public QuizGui() {
         totalQuestions = 3 - 1; // TODO prop variable ist för hardcoded värde - 1 pga indexering
         categories = new ArrayList<>();
+        playerScore = new ArrayList<>();
 
         // Welcome Panel
         loadWelcomePanel();
@@ -77,7 +80,6 @@ public class QuizGui extends JFrame implements ActionListener {
     }
 
     public void loadWaitingRoomPanel() {
-
         mainPanel.removeAll();
         mainPanel.add(waitingRoomPanel);
         mainPanel.revalidate();
@@ -157,8 +159,6 @@ public class QuizGui extends JFrame implements ActionListener {
             repaint();
             revalidate();
         }
-
-        // TODO VI KANSKE BEHÖVER RÄTTA SVARET SOM GLOBAL VARIABEL, FÖR ATT KOMMA ÅT DEN I LYSSNAREN
     }
 
     public void loadDisconnectMsg() {
@@ -199,6 +199,10 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void setCurrentQuestions(Questions currentQuestions) {
         this.currentQuestions = currentQuestions;
+    }
+
+    public void setPlayerScore(List<Integer> playerScore) {
+        this.playerScore = playerScore;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package org.quizkampen.server;
 
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameService extends Thread {
 
@@ -38,14 +40,15 @@ public class GameService extends Thread {
         return true;
     }
 
+
     // TODO ANTAL RUNDOR SOM MARK SA, FRÅN PROPS FILEN, SÄTTS I CONSTRUCTOR,
-    private void gameLoop(QuizPlayer activePlayer, int amountOfRounds) {
-        int currentRound = 0;
+    private void gameLoop(QuizPlayer activePlayer) {
+        int totalRoundsPlayers = 0;
         boolean roundOver = false;
         String msgFromClient = "";
         QuizPlayer tempPlayer;
 
-        while (currentRound <= amountOfRounds) {
+        while (true) {
             if (state == 0) {
                 System.out.println("Startar state 0");
                 quizPlayer1.sendResponseToClient(new Initiator(true));
@@ -87,6 +90,7 @@ public class GameService extends Thread {
                         case "geografi" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
                         case "historia" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
                     }
+                    roundOver = false;
                 }
                 state++;
             }
@@ -103,38 +107,44 @@ public class GameService extends Thread {
                 }
 
                 if (msgFromClient.equalsIgnoreCase("switch") && !roundOver) {
-                    System.out.println(msgFromClient);
-                    // Mellan lagring
-                    tempPlayer = nonActivePlayer;
-                    nonActivePlayer = activePlayer;
-                    activePlayer = tempPlayer;
-                    state = 3;
-                    roundOver = true;
-                    currentRound++; // TODO annat ställe kanske ?
-                    System.out.println(currentRound);
+                    if(totalRoundsPlayers < 2) {
+                        System.out.println(msgFromClient);
+                        // Mellan lagring
+                        tempPlayer = nonActivePlayer;
+                        nonActivePlayer = activePlayer;
+                        activePlayer = tempPlayer;
+                        state = 3;
+                        roundOver = true; // blir true när spelare 1 har svarat
+                        totalRoundsPlayers++;
+                        System.out.println("Rounds Total: " + totalRoundsPlayers);
+                    }
                 }
+
+                if(totalRoundsPlayers == 2) {
+                    System.out.println("Byter till state 5");
+                    state = 5;
+                }
+            }
+
+            if(state == 5) {
+                List<Integer> result = new ArrayList<>(List.of(quizPlayer1.getScore(), quizPlayer2.getScore()));
+                quizPlayer1.sendResponseToClient(new Response(true, result));
+                quizPlayer2.sendResponseToClient(new Response(true, result));
+                System.out.println("Skickar spelet slut till clients");
+                System.exit(0);
             }
         }
     }
 
-
+    // TODO LADDA IN PROPS FIL
+    // LOGIC FÖR ATT SPELARE 2 FÅR VÄLJA KATEGORI OM DET ÄR FLERA RUNDOR
+    // GÅR TILLBAKA TILL STATE 1 OCH NOLLSTÄLLER
     @Override
     public void run() {
         if (checkAllConnected()) {
             activePlayer = quizPlayer1;
             nonActivePlayer = quizPlayer2;
-            gameLoop(activePlayer, amountOfRounds);
-
-            System.out.println("Spelare 2 tur");
-            // byt skärm för pl 2
-
-            activePlayer = quizPlayer2;
-            nonActivePlayer = quizPlayer1;
-            gameLoop(activePlayer, amountOfRounds);
-
-            // Skicka res till båda spelare och ge dem resultPanel, spela igen ?
-            System.out.println("spel slut");
-
+            gameLoop(activePlayer);
         }
     }
 }

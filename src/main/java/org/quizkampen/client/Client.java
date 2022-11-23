@@ -57,6 +57,12 @@ public class Client {
                     gui.setCurrentQuestions(response.getQuestions());
                     gui.loadGamePanel();
                 }
+
+                if(response.gameIsOver()) {
+                    System.out.println("Visar resultat");
+                    gui.setPlayerScore(response.getPlayerScores());
+                    gui.loadResultPanel();
+                }
             }
         }
     }
