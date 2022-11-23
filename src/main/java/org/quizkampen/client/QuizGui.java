@@ -96,7 +96,6 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(categoryPanel, BorderLayout.CENTER);
         mainPanel.add(welcomeMsg, BorderLayout.NORTH);
-
         welcomeMsg.setText("Välj en kategori");
         welcomeMsg.setHorizontalAlignment(JLabel.CENTER);
 
@@ -118,7 +117,6 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryTwoButton.setText(categories.get(1));
         categoryThreeButton.setText(categories.get(2));
         categoryFourButton.setText(categories.get(3));
-
 
         categoryOneButton.addActionListener(this);
         categoryTwoButton.addActionListener(this);
