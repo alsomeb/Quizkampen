@@ -40,11 +40,11 @@ public class QuizGui extends JFrame implements ActionListener {
     private Questions currentQuestions;
 
     private int questionCounter;
-    private int totalQuestions; // TODO ANVÄND PROPERTY VAR HÄR SOM STANNAR EFTER X ANTAL
-
+    private int totalQuestions;
     private String response;
 
     public QuizGui() {
+        totalQuestions = 3 - 1; // TODO prop variable ist för hardcoded värde - 1 pga indexering
         categories = new ArrayList<>();
 
         // Welcome Panel
@@ -73,7 +73,6 @@ public class QuizGui extends JFrame implements ActionListener {
         startGameBtn.addActionListener(this);
 
         welcomePanel.add(welcomeMsg);
-        welcomePanel.add(Box.createHorizontalStrut(15));
         welcomePanel.add(startGameBtn);
     }
 
@@ -148,6 +147,7 @@ public class QuizGui extends JFrame implements ActionListener {
             JButton alternativBtn = new JButton();
             alternativBtn.setText(allaAlternativ.get(i));
             alternativBtn.setFont(new Font("Sans-serif", Font.BOLD, 18));
+            alternativBtn.setFocusable(false);
             alternativBtn.addActionListener(this);
             gamePanel.add(alternativBtn);
             gamePanel.add(Box.createHorizontalStrut(15));
@@ -164,6 +164,18 @@ public class QuizGui extends JFrame implements ActionListener {
         welcomeMsg.setText("The other player disconnected during game start, please restart");
         welcomeMsg.setForeground(Color.RED);
         startGameBtn.setVisible(false);
+    }
+
+    public void checkIfMoreQuestions() {
+        if(questionCounter < totalQuestions) {
+            questionCounter++;
+            loadGamePanel();
+        } else {
+            // skicka starta player 2 ? sätt player 1 i waiting room.
+            loadWaitingRoomPanel();
+            outputStream.println("switch");
+            System.out.println("Next player turn");
+        }
     }
 
     public void setCategories(List<String> categories) {
@@ -221,10 +233,12 @@ public class QuizGui extends JFrame implements ActionListener {
             if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
                 System.out.println("Du svara rätt!");
                 selectedBtn.setBackground(Color.GREEN);
+                outputStream.println("correct");
+                checkIfMoreQuestions();
             } else {
-                System.out.println("Nej");
+                System.out.println("Du svara fel");
                 selectedBtn.setBackground(Color.RED);
-
+                checkIfMoreQuestions();
             }
 
         }

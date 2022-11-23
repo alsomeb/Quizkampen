@@ -11,8 +11,11 @@ public class QuizPlayer {
     private ObjectOutputStream out;
     private BufferedReader in;
     private GameService gameService;
-    private int currentScore;
-    private int totalScore;
+
+    private String lastChosenCategory = "";
+
+    private int score;
+
 
     public QuizPlayer(Socket socket, GameService gameService) {
         this.socket = socket;
@@ -55,19 +58,19 @@ public class QuizPlayer {
         return out;
     }
 
-    public int getCurrentScore() {
-        return currentScore;
+    public int getScore() {
+        return score;
     }
 
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public int getTotalScore() {
-        return totalScore;
+    public String getLastChosenCategory() {
+        return lastChosenCategory.toLowerCase();
     }
 
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
+    public void setLastChosenCategory(String lastChosenCategory) {
+        this.lastChosenCategory = lastChosenCategory;
     }
 }
