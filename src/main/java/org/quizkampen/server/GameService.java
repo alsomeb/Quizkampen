@@ -10,7 +10,7 @@ public class GameService extends Thread {
     private QuizPlayer activePlayer;
     private int state = 0;
 
-    private int amountOfRounds;
+    private int amountOfRounds = 2;
 
     // Ladda antal frågor osv
 
