@@ -9,6 +9,7 @@ public class GameService extends Thread {
 
     private Database db = new Database();
     private Properties p = new Properties();
+    private Map<String, List<Integer>> playerScores = new HashMap<>();
     private QuizPlayer quizPlayer1;
     private QuizPlayer quizPlayer2;
     private QuizPlayer activePlayer;
@@ -158,8 +159,6 @@ public class GameService extends Thread {
 
             if (state == 5) {
                 System.out.println("State 5");
-                Map<String, List<Integer>> playerScores = new HashMap<>();
-
                 // Rundans Poäng
                 int currentScorePlayer1 = quizPlayer1.getCurrentScore();
                 int currentScorePlayer2 = quizPlayer2.getCurrentScore();
@@ -172,6 +171,8 @@ public class GameService extends Thread {
 
                 quizPlayer1.sendResponseToClient(new Response(true, playerScores));
                 quizPlayer2.sendResponseToClient(new Response(true, playerScores));
+                System.out.println(quizPlayer1.getTotalScore() + " Player 1 scores");
+                System.out.println(quizPlayer2.getTotalScore() + " Player 2 scores");
 
                 // TODO
                 System.out.println(msgFromClient);
@@ -185,8 +186,23 @@ public class GameService extends Thread {
                 System.out.println("state 6");
                 if (amountOfRounds == (totalRoundsPlayers / 2)) {
                     // Skicka respons till BÅDA clienter, där vi skriver ut FULLSTÄNDIGT RESULTAT!
+                    // LÄGG I EN METOD
+                    int currentScorePlayer1 = quizPlayer1.getCurrentScore();
+                    int currentScorePlayer2 = quizPlayer2.getCurrentScore();
+                    quizPlayer1.addScoreToTotal(currentScorePlayer1);
+                    quizPlayer2.addScoreToTotal(currentScorePlayer2);
+
+                    // Totala som skickas
+                    playerScores.put("Player 1", quizPlayer1.getTotalScore());
+                    playerScores.put("Player 2", quizPlayer2.getTotalScore());
+
+                    quizPlayer1.sendResponseToClient(playerScores);
+                    quizPlayer2.sendResponseToClient(playerScores);
+
+                    quizPlayer1.sendResponseToClient("game-over");
+                    quizPlayer2.sendResponseToClient("game-over");
                     System.out.println("Avslutar spel skickar resultat till båda");
-                    System.exit(0);
+                    state++;
                 } else {
                     //reset spel, skicka kanske ngn response till activePlayer att den skall välja kategori!
                     // medans innactive player får resultat samt waiting screen

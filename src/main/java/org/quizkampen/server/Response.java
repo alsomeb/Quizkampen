@@ -10,7 +10,7 @@ public class Response implements Serializable {
 
     private Map<String, List<Integer>> playerScores;
 
-    private boolean roundIsOver; // TODO RESETTA questionCounter index till 0 igen
+    private boolean roundIsOver;
 
     public Response(List<String> categories) {
         this.categories = categories;
@@ -22,6 +22,10 @@ public class Response implements Serializable {
 
     public Response(boolean roundIsOver, Map<String, List<Integer>> playerScores) {
         this.roundIsOver = roundIsOver;
+        this.playerScores = playerScores;
+    }
+
+    public Response(Map<String, List<Integer>> playerScores) {
         this.playerScores = playerScores;
     }
 

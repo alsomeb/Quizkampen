@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
+import java.util.Map;
 
 
 public class Client {
@@ -61,11 +63,23 @@ public class Client {
                     if(response.getPlayerScores() != null) {
                         gui.setPlayerScore(response.getPlayerScores());
                         gui.loadResultPanel();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         System.out.println("Resettar questionCounter");
                         gui.setQuestionCounter(0); // resetta counter på questionCounter
                         gui.getCurrentQuestions().getCurrentQuestions().removeAll(gui.getCurrentQuestions().getCurrentQuestions()); // resettar listan ?
                         System.out.println(gui.getCurrentQuestions().getCurrentQuestions());
                     }
+                }
+            }
+
+            if (msgFromServer instanceof String gameOverString) {
+                if(gameOverString.equalsIgnoreCase("game-over")) {
+                    System.out.println("Spelet slut laddar in resultat");
+                    // skicka tbx till server nu slut stäng ner mig
                 }
             }
         }
