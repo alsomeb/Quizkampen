@@ -5,21 +5,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuizPlayer {
     private Socket socket;
     private ObjectOutputStream out;
     private BufferedReader in;
-    private GameService gameService;
+    private GameService gameService; // TODO används ej ?
 
     private String lastChosenCategory = "";
 
-    private int score;
+    private int currentScore;
+
+    private List<Integer> totalScore;
 
 
     public QuizPlayer(Socket socket, GameService gameService) {
         this.socket = socket;
         this.gameService = gameService;
+        totalScore = new ArrayList<>();
 
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -58,16 +63,28 @@ public class QuizPlayer {
         return out;
     }
 
-    public int getScore() {
-        return score;
+    public int getCurrentScore() {
+        return currentScore;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
     }
 
     public String getLastChosenCategory() {
         return lastChosenCategory.toLowerCase();
+    }
+
+    public List<Integer> getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(List<Integer> totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public void addScoreToTotal(int score) {
+        totalScore.add(score);
     }
 
     public void setLastChosenCategory(String lastChosenCategory) {

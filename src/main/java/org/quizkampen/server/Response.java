@@ -2,14 +2,18 @@ package org.quizkampen.server;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class Response implements Serializable {
     private List<String> categories;
     private Questions questions;
 
-    private List<Integer> playerScores;
+/*    private List<Integer> playerScores;
+    // TODO lägg in response hashmap*/
 
-    private boolean gameIsOver;
+    private Map<String, List<Integer>> playerScores;
+
+    private boolean roundIsOver;
 
     public Response(List<String> categories) {
         this.categories = categories;
@@ -19,8 +23,8 @@ public class Response implements Serializable {
         this.questions = questions;
     }
 
-    public Response(boolean gameIsOver, List<Integer> playerScores) {
-        this.gameIsOver = gameIsOver;
+    public Response(boolean roundIsOver, Map<String, List<Integer>> playerScores) {
+        this.roundIsOver = roundIsOver;
         this.playerScores = playerScores;
     }
 
@@ -32,11 +36,11 @@ public class Response implements Serializable {
         return categories;
     }
 
-    public boolean gameIsOver() {
-        return gameIsOver;
+    public boolean roundIsOver() {
+        return roundIsOver;
     }
 
-    public List<Integer> getPlayerScores() {
+    public Map<String, List<Integer>> getPlayerScores() {
         return playerScores;
     }
 }

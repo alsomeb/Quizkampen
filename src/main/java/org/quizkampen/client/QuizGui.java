@@ -8,8 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 
 public class QuizGui extends JFrame implements ActionListener {
@@ -42,12 +41,12 @@ public class QuizGui extends JFrame implements ActionListener {
     private int totalQuestions;
     private String response;
 
-    private List<Integer> playerScore;
+    private Map<String, List<Integer>> playerScore;
 
     public QuizGui() {
         totalQuestions = 3 - 1; // TODO prop variable ist för hardcoded värde - 1 pga indexering
         categories = new ArrayList<>();
-        playerScore = new ArrayList<>();
+        playerScore = new HashMap<>();
 
         // Welcome Panel
         loadWelcomePanel();
@@ -90,6 +89,8 @@ public class QuizGui extends JFrame implements ActionListener {
         textLabelOne.setVerticalAlignment(JLabel.CENTER);
     }
     public void loadResultPanel(){
+        // EN CLIENT FÅR RESULTAT + EN TILL TEXT SOM SÄGER VÄNTAR PÅ ANDRA SPELAREN
+        // EN GLOBAL KNAPP SOM SÄGER GÅ VIDARE
         mainPanel.removeAll();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(resultPanel, BorderLayout.CENTER);
@@ -180,7 +181,7 @@ public class QuizGui extends JFrame implements ActionListener {
     }
 
     public void checkIfMoreQuestions() {
-        if(questionCounter < totalQuestions) {
+        if (questionCounter < totalQuestions) {
             questionCounter++;
             loadGamePanel();
         } else {
@@ -213,7 +214,7 @@ public class QuizGui extends JFrame implements ActionListener {
         this.currentQuestions = currentQuestions;
     }
 
-    public void setPlayerScore(List<Integer> playerScore) {
+    public void setPlayerScore(Map<String, List<Integer>> playerScore) {
         this.playerScore = playerScore;
     }
 
@@ -253,11 +254,11 @@ public class QuizGui extends JFrame implements ActionListener {
                 outputStream.println("correct");
                 checkIfMoreQuestions();
             } else {
-                System.out.println("Du svara fel");
+                System.out.println("wrong");
+                outputStream.println("wrong");
                 selectedBtn.setBackground(Color.RED);
                 checkIfMoreQuestions();
             }
-
         }
     }
 
