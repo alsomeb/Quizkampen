@@ -1,5 +1,7 @@
 package org.quizkampen.server;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.*;
 
@@ -15,8 +17,6 @@ public class GameService extends Thread {
     private int amountOfRounds;
     //private String amountOfRounds;
 
-
-    // Ladda antal frågor osv
 
     public GameService(Socket player1Socket, Socket player2Socket) {
         // TODO LÄS FRÅN PROPS FIL
@@ -89,17 +89,25 @@ public class GameService extends Thread {
                     msgFromClient = msgFromClient.toLowerCase();
                     System.out.println("Startar state 3, skickar Frågor till spelaren");
                     switch (msgFromClient) {
-                        case "litteraturkonst" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
-                        case "programmering" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
-                        case "geografi" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
-                        case "historia" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
+                        case "litteraturkonst" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
+                        case "programmering" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
+                        case "geografi" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
+                        case "historia" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
                     }
                 } else {
                     switch (nonActivePlayer.getLastChosenCategory()) {
-                        case "litteraturkonst" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
-                        case "programmering" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
-                        case "geografi" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
-                        case "historia" -> activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
+                        case "litteraturkonst" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.LITTERATURKONST)));
+                        case "programmering" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.PROGRAMMERING)));
+                        case "geografi" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.GEOGRAFI)));
+                        case "historia" ->
+                                activePlayer.sendResponseToClient(new Response(db.getQuestionsListByName(DbEnum.HISTORIA)));
                     }
                     roundOver = false;
                 }

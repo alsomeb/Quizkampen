@@ -75,6 +75,8 @@ public class QuizGui extends JFrame implements ActionListener {
 
         welcomePanel.add(textLabelTwo);
         welcomePanel.add(startGameBtn);
+        repaint();
+        revalidate();
     }
 
     public void loadWaitingRoomPanel() {
@@ -87,15 +89,17 @@ public class QuizGui extends JFrame implements ActionListener {
         textLabelOne.setFont(new Font("Sans-serif", Font.BOLD, 22));
         textLabelOne.setHorizontalAlignment(JLabel.CENTER);
         textLabelOne.setVerticalAlignment(JLabel.CENTER);
+        repaint();
+        revalidate();
     }
     public void loadResultPanel(){
         // EN CLIENT FÅR RESULTAT + EN TILL TEXT SOM SÄGER VÄNTAR PÅ ANDRA SPELAREN
         // EN GLOBAL KNAPP SOM SÄGER GÅ VIDARE
         mainPanel.removeAll();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(resultPanel, BorderLayout.CENTER);
-        textLabelTwo.setText("Result player 1:  " + playerScore.get(0));
-        textLabelOne.setText("Result player 2:  " + playerScore.get(1));
+        mainPanel.setLayout(new GridBagLayout());
+        mainPanel.add(resultPanel);
+        textLabelTwo.setText("Result player 1:  " + playerScore.get("Player 1"));
+        textLabelOne.setText("Result player 2:  " + playerScore.get("Player 2"));
         resultPanel.add(textLabelTwo);
         resultPanel.add(textLabelOne);
         textLabelTwo.setHorizontalAlignment(JLabel.CENTER);
@@ -136,6 +140,8 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryTwoButton.addActionListener(this);
         categoryThreeButton.addActionListener(this);
         categoryFourButton.addActionListener(this);
+        repaint();
+        revalidate();
     }
 
     public void loadGamePanel() {
