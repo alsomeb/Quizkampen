@@ -61,6 +61,7 @@ public class GameService extends Thread {
 
         while (true) {
             if (state == 0) {
+                System.out.println("PROPS TOTAL ROUNDS TO PLAY: " + amountOfRounds);
                 System.out.println("Startar state 0");
                 quizPlayer1.sendResponseToClient(new Initiator(true));
                 quizPlayer2.sendResponseToClient(new Initiator(true));
