@@ -3,6 +3,8 @@ package org.quizkampen.client;
 import org.quizkampen.server.Question;
 import org.quizkampen.server.Questions;
 import org.quizkampen.static_variable.CustomCollors;
+import org.quizkampen.static_variable.CustomFonts;
+import org.quizkampen.static_variable.CustomSizes;
 import org.quizkampen.timerpanel.TimerPanel;
 
 import javax.swing.*;
@@ -60,7 +62,7 @@ public class QuizGui extends JFrame implements ActionListener {
         this.add(mainPanel);
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(welcomePanel, BorderLayout.CENTER);
-        this.setSize(800, 750);
+        this.setSize(CustomSizes.WIDTH, CustomSizes.HEIGHT);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -73,10 +75,10 @@ public class QuizGui extends JFrame implements ActionListener {
         welcomePanel.setBackground(CustomCollors.Bright);
         welcomePanel.setLayout(new GridBagLayout());
         // Label
-        textLabelTwo.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        textLabelTwo.setFont(CustomFonts.current_Sansserif_Label);
         // Button
         startGameBtn.setFocusable(false);
-        startGameBtn.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        startGameBtn.setFont(CustomFonts.current_Sansserif_Label);
         startGameBtn.addActionListener(this);
 
         welcomePanel.add(textLabelTwo);
@@ -91,7 +93,7 @@ public class QuizGui extends JFrame implements ActionListener {
         waitingRoomPanel.setBackground(CustomCollors.Bright);
         waitingRoomPanel.setLayout(new BorderLayout());
         waitingRoomPanel.add(textLabelOne, BorderLayout.CENTER);
-        textLabelOne.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        textLabelOne.setFont(CustomFonts.current_Sansserif_Label);
         textLabelOne.setHorizontalAlignment(JLabel.CENTER);
         textLabelOne.setVerticalAlignment(JLabel.CENTER);
     }
@@ -130,13 +132,13 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryPanel.add(Box.createHorizontalStrut(15));
         categoryPanel.add(categoryFourButton);
 
-        categoryOneButton.setFont(new Font("Sans-serif", Font.BOLD, 18));
+        categoryOneButton.setFont(CustomFonts.current_Sansserif_Button);
         categoryOneButton.setBackground(CustomCollors.BG);
-        categoryTwoButton.setFont(new Font("Sans-serif", Font.BOLD, 18));
+        categoryTwoButton.setFont(CustomFonts.current_Sansserif_Button);
         categoryTwoButton.setBackground(CustomCollors.BG);
-        categoryThreeButton.setFont(new Font("Sans-serif", Font.BOLD, 18));
+        categoryThreeButton.setFont(CustomFonts.current_Sansserif_Button);
         categoryThreeButton.setBackground(CustomCollors.BG);
-        categoryFourButton.setFont(new Font("Sans-serif", Font.BOLD, 18));
+        categoryFourButton.setFont(CustomFonts.current_Sansserif_Button);
         categoryFourButton.setBackground(CustomCollors.BG);
         Collections.shuffle(categories);
         categoryOneButton.setText(categories.get(0));
@@ -210,6 +212,9 @@ public class QuizGui extends JFrame implements ActionListener {
             System.out.println("Next player turn");
         }
     }
+    public void Property_method(String pr_str){
+
+    }
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
@@ -268,9 +273,15 @@ public class QuizGui extends JFrame implements ActionListener {
 
         if (currentQuestions != null) {
             String currentRightAnswer = currentQuestions.getCurrentQuestions().get(questionCounter).getRightAnswer();
+
             if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
                 System.out.println("Du svara rätt!");
                 selectedBtn.setBackground(Color.GREEN);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
                 outputStream.println("correct");
 
                 checkIfMoreQuestions();
