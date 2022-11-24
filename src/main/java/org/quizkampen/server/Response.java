@@ -8,12 +8,9 @@ public class Response implements Serializable {
     private List<String> categories;
     private Questions questions;
 
-/*    private List<Integer> playerScores;
-    // TODO lägg in response hashmap*/
-
     private Map<String, List<Integer>> playerScores;
 
-    private boolean roundIsOver;
+    private boolean roundIsOver; // TODO RESETTA questionCounter index till 0 igen
 
     public Response(List<String> categories) {
         this.categories = categories;

@@ -61,7 +61,10 @@ public class Client {
                     if(response.getPlayerScores() != null) {
                         gui.setPlayerScore(response.getPlayerScores());
                         gui.loadResultPanel();
-                        // resetta questionCounter
+                        System.out.println("Resettar questionCounter");
+                        gui.setQuestionCounter(0); // resetta counter på questionCounter
+                        gui.getCurrentQuestions().getCurrentQuestions().removeAll(gui.getCurrentQuestions().getCurrentQuestions()); // resettar listan ?
+                        System.out.println(gui.getCurrentQuestions().getCurrentQuestions());
                     }
                 }
             }

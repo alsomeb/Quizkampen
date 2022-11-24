@@ -129,7 +129,7 @@ public class GameService extends Thread {
                 }
 
                 if (msgFromClient.equalsIgnoreCase("switch") && !roundOver) {
-                    if (totalRoundsPlayers < amountOfRounds ) {
+                    if ((totalRoundsPlayers/2) < amountOfRounds ) {
                         System.out.println(msgFromClient);
                         // Mellan lagring
                         tempPlayer = nonActivePlayer;
@@ -144,13 +144,14 @@ public class GameService extends Thread {
 
                 // om båda spelat 1 gång, ge runda resultat (DENNA HOPPAR IN NU KORREKT)
                 if(totalRoundsPlayers % 2 == 0 && roundOver) {
+                    System.out.println("MODULUS SKIT BYTER STATE 5");
                     state = 5;
                     roundOver = false; // resetta den boolean
                 }
 
                 // Skicka slut res om alla rundor från props är körda (EJ PROVAT, REFACTORISERA STATE 6 ?)
-                if (totalRoundsPlayers == amountOfRounds) {
-                    System.out.println("Byter till state 5");
+                if ((totalRoundsPlayers / 2) == amountOfRounds) {
+                    System.out.println("Byter till state 6");
                     state = 6;
                 }
             }
@@ -182,7 +183,8 @@ public class GameService extends Thread {
             if (state == 6) {
                 // Avsluta när alla rundor
                 if (amountOfRounds == (totalRoundsPlayers / 2)) {
-                    // SKICKA TOTALT SLUT RES SAMT STÄNG NER SERVERN
+                    // Skicka respons till BÅDA clienter, där vi skriver ut FULLSTÄNDIGT RESULTAT!
+                    System.out.println("Avslutar spel skickar resultat till båda");
                     System.exit(0);
                 } else {
                     //reset spel, skicka kanske ngn response till activePlayer att den skall välja kategori!
@@ -191,7 +193,7 @@ public class GameService extends Thread {
                     nonActivePlayer = activePlayer;
                     activePlayer = tempPlayer;
                     roundOver = false;
-                    state = 1;
+                    state = 0;
                 }
             }
         }

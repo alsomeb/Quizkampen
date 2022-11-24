@@ -34,7 +34,6 @@ public class QuizGui extends JFrame implements ActionListener {
 
     private PrintWriter outputStream;
 
-
     private Questions currentQuestions;
 
     private int questionCounter;
@@ -109,7 +108,6 @@ public class QuizGui extends JFrame implements ActionListener {
     }
 
     public void loadCategoryPanel() {
-
         mainPanel.removeAll();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(categoryPanel, BorderLayout.CENTER);
@@ -224,6 +222,10 @@ public class QuizGui extends JFrame implements ActionListener {
         this.playerScore = playerScore;
     }
 
+    public void setQuestionCounter(int questionCounter) {
+        this.questionCounter = questionCounter;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton selectedBtn = (JButton) e.getSource();
@@ -253,6 +255,8 @@ public class QuizGui extends JFrame implements ActionListener {
         }
 
         if (currentQuestions != null) {
+            System.out.println(questionCounter + " questionCounter");
+            System.out.println(currentQuestions.getCurrentQuestions() + " Listan");
             String currentRightAnswer = currentQuestions.getCurrentQuestions().get(questionCounter).getRightAnswer();
             if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
                 System.out.println("Du svara rätt!");
