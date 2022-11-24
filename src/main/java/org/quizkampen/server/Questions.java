@@ -30,7 +30,7 @@ public class Questions implements Serializable {
         currentQuestions.add(new Question("Vem målade Mona Lisa", "Leonardo Da Vinci",
                 "Michelangelo", "Picasso", "Edvard Munch"));
         currentQuestions.add(new Question("Vilken bokserie var den mest sålda under 2000-talet?",
-                "Harry Potter, J.K Rowling", "Sagan om ringen", "Twilight",
+                "Harry Potter", "Sagan om ringen", "Twilight",
                 "Fifty shades"));
         currentQuestions.add(new Question("Från vilket land kommer graffitikonstnären Banksy?",
                 "England", "Frankrike", "USA", "Norge"));

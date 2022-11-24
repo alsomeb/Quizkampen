@@ -182,6 +182,7 @@ public class GameService extends Thread {
 
             if (state == 6) {
                 // Avsluta när alla rundor
+                System.out.println("state 6");
                 if (amountOfRounds == (totalRoundsPlayers / 2)) {
                     // Skicka respons till BÅDA clienter, där vi skriver ut FULLSTÄNDIGT RESULTAT!
                     System.out.println("Avslutar spel skickar resultat till båda");

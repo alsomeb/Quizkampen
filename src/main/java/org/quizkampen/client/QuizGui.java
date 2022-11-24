@@ -95,7 +95,6 @@ public class QuizGui extends JFrame implements ActionListener {
         // EN CLIENT FÅR RESULTAT + EN TILL TEXT SOM SÄGER VÄNTAR PÅ ANDRA SPELAREN
         // EN GLOBAL KNAPP SOM SÄGER GÅ VIDARE
         mainPanel.removeAll();
-        mainPanel.setLayout(new GridBagLayout());
         mainPanel.add(resultPanel);
         textLabelTwo.setText("Result player 1:  " + playerScore.get("Player 1"));
         textLabelOne.setText("Result player 2:  " + playerScore.get("Player 2"));
