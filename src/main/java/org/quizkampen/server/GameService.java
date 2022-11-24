@@ -130,7 +130,7 @@ public class GameService extends Thread {
                 }
 
                 if (msgFromClient.equalsIgnoreCase("switch") && !roundOver) {
-                    if ((totalRoundsPlayers/2) < amountOfRounds ) {
+                    if ((totalRoundsPlayers / 2) < amountOfRounds ) {
                         System.out.println(msgFromClient);
                         // Mellan lagring
                         tempPlayer = nonActivePlayer;
