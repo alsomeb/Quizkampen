@@ -9,8 +9,11 @@ public class Response implements Serializable {
     private Questions questions;
 
     private Map<String, List<Integer>> playerScores;
-
     private boolean roundIsOver;
+
+    private boolean gameIsOver;
+
+    private List<Integer> totalScore;
 
     public Response(List<String> categories) {
         this.categories = categories;
@@ -25,8 +28,9 @@ public class Response implements Serializable {
         this.playerScores = playerScores;
     }
 
-    public Response(Map<String, List<Integer>> playerScores) {
-        this.playerScores = playerScores;
+    public Response(boolean gameIsOver, List<Integer> totalScore) {
+        this.gameIsOver = gameIsOver;
+        this.totalScore = totalScore;
     }
 
     public Questions getQuestions() {
@@ -39,6 +43,14 @@ public class Response implements Serializable {
 
     public boolean roundIsOver() {
         return roundIsOver;
+    }
+
+    public boolean isGameIsOver() {
+        return gameIsOver;
+    }
+
+    public List<Integer> getTotalScore() {
+        return totalScore;
     }
 
     public Map<String, List<Integer>> getPlayerScores() {

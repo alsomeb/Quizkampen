@@ -50,8 +50,16 @@ public class QuizGui extends JFrame implements ActionListener {
     private JTextArea currentScoreArea = new JTextArea(40, 40);
     private JScrollPane scrollPain = new JScrollPane(currentScoreArea);
 
+    private List<Integer> player1Scores;
+    private List<Integer> player2Scores;
+
+    private List<Integer> totalEndScore;
+
     public QuizGui() {
         loadProps();
+        totalEndScore = new ArrayList<>();
+        player1Scores = new ArrayList<>();
+        player2Scores = new ArrayList<>();
         playerScore = new HashMap<>();
         categories = new ArrayList<>();
         amountOfQuestions = Integer.parseInt(p.getProperty("amountOfQuestions", "3"));
@@ -114,8 +122,8 @@ public class QuizGui extends JFrame implements ActionListener {
         System.out.println(playerScore.get("Player 1"));
         System.out.println(playerScore.get("Player 2"));
 
-        List<Integer> player1Scores = playerScore.get("Player 1");
-        List<Integer> player2Scores = playerScore.get("Player 2");
+        player1Scores = playerScore.get("Player 1");
+        player2Scores = playerScore.get("Player 2");
 
         for (int i = 0; i < player1Scores.size(); i++) {
             currentScoreArea.setFont(new Font("Sans-serif", Font.BOLD, 22));
@@ -128,6 +136,23 @@ public class QuizGui extends JFrame implements ActionListener {
             repaint();
         }
 
+    }
+    public void loadGameOverPanel(){
+        mainPanel.removeAll();
+        resultPanel.removeAll();
+        resultPanel.setLayout(new GridBagLayout());
+        mainPanel.add(resultPanel);
+
+        JLabel player1 = new JLabel("Player 1 total: " + totalEndScore.get(0));
+        player1.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        JLabel player2 = new JLabel("Player 2 total: " + totalEndScore.get(1));
+        player2.setFont(new Font("Sans-serif", Font.BOLD, 22));
+
+        resultPanel.add(player1);
+        resultPanel.add(Box.createHorizontalStrut(20));
+        resultPanel.add(player2);
+        revalidate();
+        repaint();
     }
 
     public void loadCategoryPanel() {
@@ -253,6 +278,9 @@ public class QuizGui extends JFrame implements ActionListener {
         currentScoreArea.setText("");
     }
 
+    public void setTotalEndScore(List<Integer> totalEndScore) {
+        this.totalEndScore = totalEndScore;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

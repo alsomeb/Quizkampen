@@ -35,7 +35,7 @@ public class Client {
 
         while ((msgFromServer = in.readObject()) != null) {
             if (msgFromServer instanceof Initiator initiator) {
-                if (initiator.allConnected()) {
+                if (initiator.allConnected() ) {
                     System.out.println("All connected, game starts");
                     gui.loadWaitingRoomPanel();
                     gui.setWaitingRoomMsg("Waiting for your turn");
@@ -46,17 +46,23 @@ public class Client {
             }
 
             if (msgFromServer instanceof Response response) {
-                if (response.getCategories() != null) {
+                if(response.isGameIsOver()) {
+                    gui.setTotalEndScore(response.getTotalScore());
+                    gui.loadGameOverPanel();
+                    System.out.println("Slut res received");
+                }
+
+                if (response.getCategories() != null && !response.isGameIsOver()) {
                     gui.setCategories(response.getCategories());
                     gui.loadCategoryPanel();
                     System.out.println(response.getCategories());
                 }
-                if (response.getQuestions() != null) {
+                if (response.getQuestions() != null && !response.isGameIsOver()) {
                     System.out.println(response.getQuestions());
                     gui.setCurrentQuestions(response.getQuestions());
                     gui.loadGamePanel();
                 }
-                if(response.roundIsOver()) {
+                if(response.roundIsOver() && !response.isGameIsOver()) {
                     if(response.getPlayerScores() != null) {
                         gui.setPlayerScore(response.getPlayerScores());
                         System.out.println(response.getPlayerScores());
@@ -75,12 +81,6 @@ public class Client {
                 }
             }
 
-            if (msgFromServer instanceof String gameOverString) {
-                if(gameOverString.equalsIgnoreCase("game-over")) {
-                    System.out.println("Spelet slut laddar in resultat");
-                    // skicka tbx till server nu slut stäng ner mig
-                }
-            }
         }
     }
 

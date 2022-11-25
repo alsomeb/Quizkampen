@@ -21,8 +21,8 @@ public class GameService extends Thread {
 
     public GameService(Socket player1Socket, Socket player2Socket) {
         // TODO LÄS FRÅN PROPS FIL
-        quizPlayer1 = new QuizPlayer(player1Socket, this); // TODO ANVÄNDS ENS GAMESERVICE OBJEKT I QUIZPLAYER?
-        quizPlayer2 = new QuizPlayer(player2Socket, this);
+        quizPlayer1 = new QuizPlayer(player1Socket); // TODO ANVÄNDS ENS GAMESERVICE OBJEKT I QUIZPLAYER?
+        quizPlayer2 = new QuizPlayer(player2Socket);
         System.out.println(player1Socket.getInetAddress().getHostAddress() + " Connected");
         System.out.println(player2Socket.getInetAddress().getHostAddress() + " Connected");
         loadProps();
@@ -50,6 +50,14 @@ public class GameService extends Thread {
         }
 
         return true;
+    }
+
+    private int sum(List<Integer> totalPointsList) {
+        int totalPoints = 0;
+        for (int i = 0; i < totalPointsList.size(); i++) {
+            totalPoints += totalPointsList.get(i);
+        }
+        return totalPoints;
     }
 
 
@@ -153,7 +161,7 @@ public class GameService extends Thread {
                 // Skicka slut res om alla rundor från props är körda (EJ PROVAT, REFACTORISERA STATE 6 ?)
                 if ((totalRoundsPlayers / 2) == amountOfRounds) {
                     System.out.println("Byter till state 6");
-                    state = 6;
+                    state = 5;
                 }
             }
 
@@ -188,13 +196,17 @@ public class GameService extends Thread {
                 // Avsluta när alla rundor
                 System.out.println("state 6");
                 if (amountOfRounds == (totalRoundsPlayers / 2)) {
-                    // Hämta total Hashmap och skicka den här till slutskärmen
-                    // Readline också hämta svar från client, som säger bara bye
-                    // if bye ++ state
+                    int totalPlayer1 = sum(playerScores.get("Player 1"));
+                    int totalPlayer2 = sum(playerScores.get("Player 2"));
+
+                    List<Integer> total = new ArrayList<>(List.of(totalPlayer1, totalPlayer2));
+                    System.out.println(total + "TOTAL POÄNG");
 
                     // Totala scores
-                    quizPlayer1.sendResponseToClient(new Response(playerScores));
-                    quizPlayer2.sendResponseToClient(new Response(playerScores));
+                    quizPlayer1.sendResponseToClient(new Response(true, total));
+                    quizPlayer2.sendResponseToClient(new Response(true, total));
+
+                    System.out.println("Skickat slutresultat");
 
                     state++;
                 } else {
