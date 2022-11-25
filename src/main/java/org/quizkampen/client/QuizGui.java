@@ -137,6 +137,23 @@ public class QuizGui extends JFrame implements ActionListener {
         }
 
     }
+    public void loadGameOverPanel(){
+        mainPanel.removeAll();
+        resultPanel.removeAll();
+        resultPanel.setLayout(new GridBagLayout());
+        mainPanel.add(resultPanel);
+
+        JLabel player1 = new JLabel("Player 1 total: " + totalEndScore.get(0));
+        player1.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        JLabel player2 = new JLabel("Player 2 total: " + totalEndScore.get(1));
+        player2.setFont(new Font("Sans-serif", Font.BOLD, 22));
+
+        resultPanel.add(player1);
+        resultPanel.add(Box.createHorizontalStrut(20));
+        resultPanel.add(player2);
+        revalidate();
+        repaint();
+    }
 
     public void loadCategoryPanel() {
         mainPanel.removeAll();

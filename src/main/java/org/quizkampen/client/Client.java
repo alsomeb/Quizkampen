@@ -35,7 +35,7 @@ public class Client {
 
         while ((msgFromServer = in.readObject()) != null) {
             if (msgFromServer instanceof Initiator initiator) {
-                if (initiator.allConnected()) {
+                if (initiator.allConnected() ) {
                     System.out.println("All connected, game starts");
                     gui.loadWaitingRoomPanel();
                     gui.setWaitingRoomMsg("Waiting for your turn");
