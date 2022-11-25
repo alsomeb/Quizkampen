@@ -5,6 +5,7 @@ import org.quizkampen.server.Questions;
 import org.quizkampen.static_variable.CustomCollors;
 import org.quizkampen.static_variable.CustomFonts;
 import org.quizkampen.static_variable.CustomSizes;
+import org.quizkampen.static_variable.Pr;
 import org.quizkampen.timerpanel.TimerPanel;
 
 import javax.swing.*;
@@ -13,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
@@ -66,7 +65,7 @@ public class QuizGui extends JFrame implements ActionListener {
         totalQuestions = amountOfQuestions - 1; // PROPS SETTINGS
         // Welcome Panel
         loadWelcomePanel();
-        startGameBtn.setBackground(CustomCollors.BG);
+        startGameBtn.setBackground(CustomCollors.Beigh);
 
         // Frame
         this.add(mainPanel);
@@ -78,6 +77,7 @@ public class QuizGui extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setTitle("Quizkampen");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        Pr.loadproperty();
     }
     private void loadProps() {
         try {
@@ -89,13 +89,13 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void loadWelcomePanel() {
         // Panel Layout
-        welcomePanel.setBackground(CustomCollors.Bright);
+        welcomePanel.setBackground(CustomCollors.Background_clr);
         welcomePanel.setLayout(new GridBagLayout());
         // Label
-        textLabelTwo.setFont(CustomFonts.current_Sansserif_Label);
+        textLabelTwo.setFont(CustomFonts.current_Font_Label);
         // Button
         startGameBtn.setFocusable(false);
-        startGameBtn.setFont(CustomFonts.current_Sansserif_Label);
+        startGameBtn.setFont(CustomFonts.current_Font_Label);
         startGameBtn.addActionListener(this);
 
         welcomePanel.add(textLabelTwo);
@@ -107,10 +107,10 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.add(waitingRoomPanel);
         mainPanel.revalidate();
         mainPanel.repaint();
-        waitingRoomPanel.setBackground(CustomCollors.Bright);
+        waitingRoomPanel.setBackground(CustomCollors.Background_clr);
         waitingRoomPanel.setLayout(new BorderLayout());
         waitingRoomPanel.add(textLabelOne, BorderLayout.CENTER);
-        textLabelOne.setFont(CustomFonts.current_Sansserif_Label);
+        textLabelOne.setFont(CustomFonts.current_Font_Label);
         textLabelOne.setHorizontalAlignment(JLabel.CENTER);
         textLabelOne.setVerticalAlignment(JLabel.CENTER);
         repaint();
@@ -119,7 +119,7 @@ public class QuizGui extends JFrame implements ActionListener {
     public void loadResultPanel(){
         mainPanel.removeAll();
         mainPanel.add(resultPanel);
-        resultPanel.setBackground(CustomCollors.Bright);
+        resultPanel.setBackground(CustomCollors.Background_clr);
 
         System.out.println(playerScore.get("Player 1"));
         System.out.println(playerScore.get("Player 2"));
@@ -128,12 +128,11 @@ public class QuizGui extends JFrame implements ActionListener {
         List<Integer> player2Scores = playerScore.get("Player 2");
 
         for (int i = 0; i < player1Scores.size(); i++) {
-            currentScoreArea.setBackground((CustomCollors.Bright));
-            currentScoreArea.setFont(CustomFonts.current_Sansserif_Label);
+            currentScoreArea.setBackground((CustomCollors.Background_clr));
+            currentScoreArea.setFont(CustomFonts.current_Font_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
             currentScoreArea.append("\t"+"\t" +"     Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
-
             resultPanel.add(scrollPain);
             revalidate();
             repaint();
@@ -147,11 +146,11 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(categoryPanel, BorderLayout.CENTER);
         mainPanel.add(textLabelTwo, BorderLayout.NORTH);
-        mainPanel.setBackground(CustomCollors.Bright);
+        mainPanel.setBackground(CustomCollors.Background_clr);
         textLabelTwo.setText("Välj en kategori");
         textLabelTwo.setHorizontalAlignment(JLabel.CENTER);
 
-        categoryPanel.setBackground(CustomCollors.Bright);
+        categoryPanel.setBackground(CustomCollors.Background_clr);
         categoryPanel.setLayout(new GridBagLayout());
         categoryPanel.add(categoryOneButton);
         categoryPanel.add(Box.createHorizontalStrut(15));
@@ -161,14 +160,14 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryPanel.add(Box.createHorizontalStrut(15));
         categoryPanel.add(categoryFourButton);
 
-        categoryOneButton.setFont(CustomFonts.current_Sansserif_Button);
-        categoryOneButton.setBackground(CustomCollors.BG);
-        categoryTwoButton.setFont(CustomFonts.current_Sansserif_Button);
-        categoryTwoButton.setBackground(CustomCollors.BG);
-        categoryThreeButton.setFont(CustomFonts.current_Sansserif_Button);
-        categoryThreeButton.setBackground(CustomCollors.BG);
-        categoryFourButton.setFont(CustomFonts.current_Sansserif_Button);
-        categoryFourButton.setBackground(CustomCollors.BG);
+        categoryOneButton.setFont(CustomFonts.current_Font_Button);
+        categoryOneButton.setBackground(CustomCollors.Beigh);
+        categoryTwoButton.setFont(CustomFonts.current_Font_Button);
+        categoryTwoButton.setBackground(CustomCollors.Beigh);
+        categoryThreeButton.setFont(CustomFonts.current_Font_Button);
+        categoryThreeButton.setBackground(CustomCollors.Beigh);
+        categoryFourButton.setFont(CustomFonts.current_Font_Button);
+        categoryFourButton.setBackground(CustomCollors.Beigh);
         Collections.shuffle(categories);
         categoryOneButton.setText(categories.get(0));
         categoryTwoButton.setText(categories.get(1));
@@ -187,11 +186,11 @@ public class QuizGui extends JFrame implements ActionListener {
 
         mainPanel.removeAll();
         gamePanel.removeAll();
-        mainPanel.setBackground(CustomCollors.Bright);
+        mainPanel.setBackground(CustomCollors.Background_clr);
         mainPanel.add(questionLabel, BorderLayout.CENTER);
 
         mainPanel.add(gamePanel, BorderLayout.SOUTH);
-        gamePanel.setBackground(CustomCollors.Bright);
+        gamePanel.setBackground(CustomCollors.Background_clr);
         //mainPanel.add(stopwatch,BorderLayout.SOUTH);
 
         textLabelTwo.setText("Game starts now!");
@@ -212,8 +211,8 @@ public class QuizGui extends JFrame implements ActionListener {
         for (int i = 0; i < allaAlternativ.size(); i++) {
             JButton alternativBtn = new JButton();
             alternativBtn.setText(allaAlternativ.get(i));
-            alternativBtn.setBackground(CustomCollors.BG);
-            alternativBtn.setFont(new Font("Sans-serif", Font.BOLD, 18));
+            alternativBtn.setBackground(CustomCollors.Beigh);
+            alternativBtn.setFont(CustomFonts.current_Font_Button);
             alternativBtn.setFocusable(false);
             alternativBtn.addActionListener(this);
             gamePanel.add(alternativBtn);
@@ -227,7 +226,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void loadDisconnectMsg() {
         textLabelTwo.setText("The other player disconnected during game start, please restart");
-        textLabelTwo.setForeground(CustomCollors.timer_collor);
+        textLabelTwo.setForeground(CustomCollors.Brown);
         startGameBtn.setVisible(false);
     }
 

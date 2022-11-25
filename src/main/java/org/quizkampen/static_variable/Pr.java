@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class Pr {
 
-    public void loadproperty(String prpstr){
+    public final static void loadproperty(){
         Properties gui_pr=new Properties();
         try {
             gui_pr.load(new FileInputStream("src/main/resources/Gui.properties"));
@@ -17,12 +17,16 @@ public class Pr {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        String FontsButton=gui_pr.getProperty("FontsButton","Sansserif");
 
 
 
-
-
-
+        if (FontsButton.trim().equalsIgnoreCase("Dialog")){
+            CustomFonts.current_Font_Button =CustomFonts.Dialog;
+        } else if (FontsButton.trim().equalsIgnoreCase("Monospace")) {
+            CustomFonts.current_Font_Button =CustomFonts.Monospace;
+        }
+        else CustomFonts.current_Font_Button =CustomFonts.Standard_Sansserif_Button;
 
 
     }
