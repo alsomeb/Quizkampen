@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +42,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     private PrintWriter outputStream;
 
-
+    private boolean answerPicked=false;
     private Questions currentQuestions;
 
     private int questionCounter;
@@ -48,6 +50,7 @@ public class QuizGui extends JFrame implements ActionListener {
     private String response;
 
     private List<Integer> playerScore;
+
 
     public QuizGui() {
         totalQuestions = 3 - 1; // TODO prop variable ist för hardcoded värde - 1 pga indexering
@@ -212,9 +215,6 @@ public class QuizGui extends JFrame implements ActionListener {
             System.out.println("Next player turn");
         }
     }
-    public void Property_method(String pr_str){
-
-    }
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
@@ -277,11 +277,7 @@ public class QuizGui extends JFrame implements ActionListener {
             if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
                 System.out.println("Du svara rätt!");
                 selectedBtn.setBackground(Color.GREEN);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
+
                 outputStream.println("correct");
 
                 checkIfMoreQuestions();
