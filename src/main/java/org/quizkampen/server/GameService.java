@@ -183,7 +183,7 @@ public class GameService extends Thread {
                     state = 6;
                 }
             }
-
+            //Test av commit
             if (state == 6) {
                 // Avsluta när alla rundor
                 System.out.println("state 6");
