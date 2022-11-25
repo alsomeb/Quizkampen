@@ -237,7 +237,6 @@ public class QuizGui extends JFrame implements ActionListener {
             questionCounter++;
             loadGamePanel();
         } else {
-            // skicka starta player 2 ? sätt player 1 i waiting room.
             loadWaitingRoomPanel();
             outputStream.println("switch");
             System.out.println("Next player turn");
