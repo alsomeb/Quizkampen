@@ -21,8 +21,8 @@ public class GameService extends Thread {
 
     public GameService(Socket player1Socket, Socket player2Socket) {
         // TODO LÄS FRÅN PROPS FIL
-        quizPlayer1 = new QuizPlayer(player1Socket, this); // TODO ANVÄNDS ENS GAMESERVICE OBJEKT I QUIZPLAYER?
-        quizPlayer2 = new QuizPlayer(player2Socket, this);
+        quizPlayer1 = new QuizPlayer(player1Socket); // TODO ANVÄNDS ENS GAMESERVICE OBJEKT I QUIZPLAYER?
+        quizPlayer2 = new QuizPlayer(player2Socket);
         System.out.println(player1Socket.getInetAddress().getHostAddress() + " Connected");
         System.out.println(player2Socket.getInetAddress().getHostAddress() + " Connected");
         loadProps();

@@ -12,7 +12,6 @@ public class QuizPlayer {
     private Socket socket;
     private ObjectOutputStream out;
     private BufferedReader in;
-    private GameService gameService; // TODO används ej ?
 
     private String lastChosenCategory = "";
 
@@ -21,9 +20,8 @@ public class QuizPlayer {
     private List<Integer> totalScore;
 
 
-    public QuizPlayer(Socket socket, GameService gameService) {
+    public QuizPlayer(Socket socket) {
         this.socket = socket;
-        this.gameService = gameService; // TODO ANVÄNDER ANLDRIG GS HÄR INNE
         totalScore = new ArrayList<>();
 
         try {
@@ -56,10 +54,6 @@ public class QuizPlayer {
         return message;
     }
 
-    public Socket getSocket() {
-        return socket;
-    }
-
     public ObjectOutputStream getOut() {
         return out;
     }
@@ -80,9 +74,6 @@ public class QuizPlayer {
         return totalScore;
     }
 
-    public void setTotalScore(List<Integer> totalScore) {
-        this.totalScore = totalScore;
-    }
 
     public void addScoreToTotal(int score) {
         totalScore.add(score);

@@ -278,14 +278,6 @@ public class QuizGui extends JFrame implements ActionListener {
         currentScoreArea.setText("");
     }
 
-    public void setPlayer1Scores(List<Integer> player1Scores) {
-        this.player1Scores = player1Scores;
-    }
-
-    public void setPlayer2Scores(List<Integer> player2Scores) {
-        this.player2Scores = player2Scores;
-    }
-
     public void setTotalEndScore(List<Integer> totalEndScore) {
         this.totalEndScore = totalEndScore;
     }
