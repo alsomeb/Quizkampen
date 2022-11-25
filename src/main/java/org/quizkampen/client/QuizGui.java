@@ -128,10 +128,11 @@ public class QuizGui extends JFrame implements ActionListener {
         List<Integer> player2Scores = playerScore.get("Player 2");
 
         for (int i = 0; i < player1Scores.size(); i++) {
-            currentScoreArea.setFont(new Font("Sans-serif", Font.BOLD, 22));
+            currentScoreArea.setBackground((CustomCollors.Bright));
+            currentScoreArea.setFont(CustomFonts.current_Sansserif_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
-            currentScoreArea.append("     Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n");
+            currentScoreArea.append("\t"+"\t" +"     Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
 
             resultPanel.add(scrollPain);
             revalidate();
@@ -264,8 +265,9 @@ public class QuizGui extends JFrame implements ActionListener {
         this.currentQuestions = currentQuestions;
     }
 
-    public void setPlayerScore(List<Integer> playerScore) {
+    public void setPlayerScore(Map<String, List<Integer>> playerScore) {
         this.playerScore = playerScore;
+
     }
 
     public void setQuestionCounter(int questionCounter) {
