@@ -44,7 +44,7 @@ public class Questions implements Serializable {
 
     private void setHistoriaQuestions() {
         currentQuestions.add(new Question("När öppnade London sin tunnelbana?", "1863", "1898", "1793", "1912"));
-        currentQuestions.add(new Question("Vem uppfann World Wide Web, och när?", "Tim Berners-Lee, 1990", "Bill Gates", "Elon Musk", "Donald Trump"));
+        currentQuestions.add(new Question("Vem uppfann World Wide Web, och när?", "Tim Berners-Lee", "Bill Gates", "Elon Musk", "Donald Trump"));
         currentQuestions.add(new Question("Vilket år sjönk Titanic?", "1912", "1914", "1924", "1899"));
     }
 

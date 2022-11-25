@@ -98,6 +98,11 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.add(resultPanel);
         textLabelTwo.setText("Result player 1:  " + playerScore.get("Player 1"));
         textLabelOne.setText("Result player 2:  " + playerScore.get("Player 2"));
+
+        System.out.println("Player 1" + playerScore.get("Player 1"));
+        System.out.println("Index 0" + playerScore.get("Player 1").get(0));
+        System.out.println("Size" + playerScore.get("Player 1").size());
+
         resultPanel.add(textLabelTwo);
         resultPanel.add(textLabelOne);
         textLabelTwo.setHorizontalAlignment(JLabel.CENTER);

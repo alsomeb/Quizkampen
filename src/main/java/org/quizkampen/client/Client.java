@@ -62,6 +62,7 @@ public class Client {
                 if(response.roundIsOver()) {
                     if(response.getPlayerScores() != null) {
                         gui.setPlayerScore(response.getPlayerScores());
+                        System.out.println(response.getPlayerScores());
                         gui.loadResultPanel();
                         try {
                             Thread.sleep(2000);

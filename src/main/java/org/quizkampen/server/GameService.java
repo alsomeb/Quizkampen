@@ -174,6 +174,7 @@ public class GameService extends Thread {
                 System.out.println(quizPlayer1.getTotalScore() + " Player 1 scores");
                 System.out.println(quizPlayer2.getTotalScore() + " Player 2 scores");
 
+
                 // TODO
                 System.out.println(msgFromClient);
                 if(msgFromClient.equalsIgnoreCase("switch")) {
