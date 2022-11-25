@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
@@ -39,14 +41,21 @@ public class QuizGui extends JFrame implements ActionListener {
     private int questionCounter;
     private int totalQuestions;
     private String response;
+    private int amountOfQuestions;
 
     private Map<String, List<Integer>> playerScore;
+    private Properties p = new Properties();
+
+    private JLabel currentScoreLabel = new JLabel();
+    private JTextArea currentScoreArea = new JTextArea(40, 40);
+    private JScrollPane scrollPain = new JScrollPane(currentScoreArea);
 
     public QuizGui() {
-        totalQuestions = 3 - 1; // TODO prop variable ist för hardcoded värde - 1 pga indexering
-        categories = new ArrayList<>();
+        loadProps();
         playerScore = new HashMap<>();
-
+        categories = new ArrayList<>();
+        amountOfQuestions = Integer.parseInt(p.getProperty("amountOfQuestions", "3"));
+        totalQuestions = amountOfQuestions - 1; // PROPS SETTINGS
         // Welcome Panel
         loadWelcomePanel();
 
@@ -60,6 +69,13 @@ public class QuizGui extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setTitle("Quizkampen");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    private void loadProps() {
+        try {
+            p.load(new FileInputStream("src/main/resources/game.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadWelcomePanel() {
