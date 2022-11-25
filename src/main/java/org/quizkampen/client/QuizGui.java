@@ -149,7 +149,7 @@ public class QuizGui extends JFrame implements ActionListener {
         player2.setFont(new Font("Sans-serif", Font.BOLD, 22));
 
         resultPanel.add(player1);
-        resultPanel.add(Box.createHorizontalStrut(20));
+        resultPanel.add(Box.createHorizontalStrut(40));
         resultPanel.add(player2);
         revalidate();
         repaint();

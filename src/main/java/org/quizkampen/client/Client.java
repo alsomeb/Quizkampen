@@ -75,7 +75,7 @@ public class Client {
                         }
                         System.out.println("Resettar questionCounter");
                         gui.setQuestionCounter(0); // resetta counter på questionCounter
-                        gui.getCurrentQuestions().getCurrentQuestions().removeAll(gui.getCurrentQuestions().getCurrentQuestions()); // resettar listan ?
+                        gui.getCurrentQuestions().getCurrentQuestions().removeAll(gui.getCurrentQuestions().getCurrentQuestions());
                         System.out.println(gui.getCurrentQuestions().getCurrentQuestions());
                     }
                 }
