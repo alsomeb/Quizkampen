@@ -16,12 +16,10 @@ public class GameService extends Thread {
     private QuizPlayer nonActivePlayer;
     private int state = 0;
     private int amountOfRounds;
-    //private String amountOfRounds;
 
 
     public GameService(Socket player1Socket, Socket player2Socket) {
-        // TODO LÄS FRÅN PROPS FIL
-        quizPlayer1 = new QuizPlayer(player1Socket); // TODO ANVÄNDS ENS GAMESERVICE OBJEKT I QUIZPLAYER?
+        quizPlayer1 = new QuizPlayer(player1Socket);
         quizPlayer2 = new QuizPlayer(player2Socket);
         System.out.println(player1Socket.getInetAddress().getHostAddress() + " Connected");
         System.out.println(player2Socket.getInetAddress().getHostAddress() + " Connected");
@@ -61,7 +59,6 @@ public class GameService extends Thread {
     }
 
 
-    // TODO ANTAL RUNDOR SOM MARK SA, FRÅN PROPS FILEN, SÄTTS I CONSTRUCTOR,
     private void gameLoop(QuizPlayer activePlayer) {
         int totalRoundsPlayers = 0;
         boolean roundOver = false;
@@ -158,7 +155,6 @@ public class GameService extends Thread {
                     roundOver = false; // resetta den boolean
                 }
 
-                // Skicka slut res om alla rundor från props är körda (EJ PROVAT, REFACTORISERA STATE 6 ?)
                 if ((totalRoundsPlayers / 2) == amountOfRounds) {
                     System.out.println("Byter till state 6");
                     state = 5;
@@ -193,7 +189,6 @@ public class GameService extends Thread {
             }
             //Test av commit
             if (state == 6) {
-                // Avsluta när alla rundor
                 System.out.println("state 6");
                 if (amountOfRounds == (totalRoundsPlayers / 2)) {
                     int totalPlayer1 = sum(playerScores.get("Player 1"));
@@ -210,8 +205,6 @@ public class GameService extends Thread {
 
                     state++;
                 } else {
-                    //reset spel, skicka kanske ngn response till activePlayer att den skall välja kategori!
-                    // medans innactive player får resultat samt waiting screen
                     tempPlayer = nonActivePlayer;
                     nonActivePlayer = activePlayer;
                     activePlayer = tempPlayer;
