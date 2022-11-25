@@ -23,7 +23,7 @@ public class QuizPlayer {
 
     public QuizPlayer(Socket socket, GameService gameService) {
         this.socket = socket;
-        this.gameService = gameService;
+        this.gameService = gameService; // TODO ANVÄNDER ANLDRIG GS HÄR INNE
         totalScore = new ArrayList<>();
 
         try {
@@ -36,6 +36,7 @@ public class QuizPlayer {
 
     public void sendResponseToClient(Object response) {
         try {
+            out.reset();
             out.writeObject(response);
         } catch (IOException e) {
             e.printStackTrace();

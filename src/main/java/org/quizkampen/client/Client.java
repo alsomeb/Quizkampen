@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.List;
-import java.util.Map;
-
 
 public class Client {
     private QuizGui gui;
@@ -65,7 +62,8 @@ public class Client {
                         System.out.println(response.getPlayerScores());
                         gui.loadResultPanel();
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(5000);
+                            gui.resetScoreArea();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }

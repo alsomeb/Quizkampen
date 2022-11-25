@@ -92,23 +92,26 @@ public class QuizGui extends JFrame implements ActionListener {
         revalidate();
     }
     public void loadResultPanel(){
-        // EN CLIENT FÅR RESULTAT + EN TILL TEXT SOM SÄGER VÄNTAR PÅ ANDRA SPELAREN
-        // EN GLOBAL KNAPP SOM SÄGER GÅ VIDARE
         mainPanel.removeAll();
         mainPanel.add(resultPanel);
-        textLabelTwo.setText("Result player 1:  " + playerScore.get("Player 1"));
-        textLabelOne.setText("Result player 2:  " + playerScore.get("Player 2"));
 
-        System.out.println("Player 1" + playerScore.get("Player 1"));
-        System.out.println("Index 0" + playerScore.get("Player 1").get(0));
-        System.out.println("Size" + playerScore.get("Player 1").size());
+        System.out.println(playerScore.get("Player 1"));
+        System.out.println(playerScore.get("Player 2"));
 
-        resultPanel.add(textLabelTwo);
-        resultPanel.add(textLabelOne);
-        textLabelTwo.setHorizontalAlignment(JLabel.CENTER);
-        textLabelOne.setHorizontalAlignment(JLabel.CENTER);
-        revalidate();
-        repaint();
+        List<Integer> player1Scores = playerScore.get("Player 1");
+        List<Integer> player2Scores = playerScore.get("Player 2");
+
+        for (int i = 0; i < player1Scores.size(); i++) {
+            currentScoreArea.setFont(new Font("Sans-serif", Font.BOLD, 22));
+            currentScoreArea.setLineWrap(true);
+            currentScoreArea.setEditable(false);
+            currentScoreArea.append("     Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n");
+
+            resultPanel.add(scrollPain);
+            revalidate();
+            repaint();
+        }
+
     }
 
     public void loadCategoryPanel() {
@@ -230,6 +233,11 @@ public class QuizGui extends JFrame implements ActionListener {
         this.questionCounter = questionCounter;
     }
 
+    public void resetScoreArea() {
+        currentScoreArea.setText("");
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton selectedBtn = (JButton) e.getSource();
@@ -275,6 +283,5 @@ public class QuizGui extends JFrame implements ActionListener {
             }
         }
     }
-
 }
 
