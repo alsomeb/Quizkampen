@@ -65,7 +65,7 @@ public class QuizGui extends JFrame implements ActionListener {
         totalQuestions = amountOfQuestions - 1; // PROPS SETTINGS
         // Welcome Panel
         loadWelcomePanel();
-        startGameBtn.setBackground(CustomCollors.Btn_clr);
+        startGameBtn.setBackground(CustomCollors.btn_Clr);
 
         // Frame
         this.add(mainPanel);
@@ -89,7 +89,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void loadWelcomePanel() {
         // Panel Layout
-        welcomePanel.setBackground(CustomCollors.Background_clr);
+        welcomePanel.setBackground(CustomCollors.background_Clr);
         welcomePanel.setLayout(new GridBagLayout());
         // Label
         textLabelTwo.setFont(CustomFonts.current_Font_Label);
@@ -107,7 +107,7 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.add(waitingRoomPanel);
         mainPanel.revalidate();
         mainPanel.repaint();
-        waitingRoomPanel.setBackground(CustomCollors.Background_clr);
+        waitingRoomPanel.setBackground(CustomCollors.background_Clr);
         waitingRoomPanel.setLayout(new BorderLayout());
         waitingRoomPanel.add(textLabelOne, BorderLayout.CENTER);
         textLabelOne.setFont(CustomFonts.current_Font_Label);
@@ -119,7 +119,7 @@ public class QuizGui extends JFrame implements ActionListener {
     public void loadResultPanel(){
         mainPanel.removeAll();
         mainPanel.add(resultPanel);
-        resultPanel.setBackground(CustomCollors.Background_clr);
+        resultPanel.setBackground(CustomCollors.background_Clr);
 
         System.out.println(playerScore.get("Player 1"));
         System.out.println(playerScore.get("Player 2"));
@@ -128,7 +128,7 @@ public class QuizGui extends JFrame implements ActionListener {
         List<Integer> player2Scores = playerScore.get("Player 2");
 
         for (int i = 0; i < player1Scores.size(); i++) {
-            currentScoreArea.setBackground((CustomCollors.Background_clr));
+            currentScoreArea.setBackground((CustomCollors.background_Clr));
             currentScoreArea.setFont(CustomFonts.current_Font_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
@@ -146,11 +146,11 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(categoryPanel, BorderLayout.CENTER);
         mainPanel.add(textLabelTwo, BorderLayout.NORTH);
-        mainPanel.setBackground(CustomCollors.Background_clr);
+        mainPanel.setBackground(CustomCollors.background_Clr);
         textLabelTwo.setText("Välj en kategori");
         textLabelTwo.setHorizontalAlignment(JLabel.CENTER);
 
-        categoryPanel.setBackground(CustomCollors.Background_clr);
+        categoryPanel.setBackground(CustomCollors.background_Clr);
         categoryPanel.setLayout(new GridBagLayout());
         categoryPanel.add(categoryOneButton);
         categoryPanel.add(Box.createHorizontalStrut(15));
@@ -161,13 +161,13 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryPanel.add(categoryFourButton);
 
         categoryOneButton.setFont(CustomFonts.current_Font_Button);
-        categoryOneButton.setBackground(CustomCollors.Btn_clr);
+        categoryOneButton.setBackground(CustomCollors.btn_Clr);
         categoryTwoButton.setFont(CustomFonts.current_Font_Button);
-        categoryTwoButton.setBackground(CustomCollors.Btn_clr);
+        categoryTwoButton.setBackground(CustomCollors.btn_Clr);
         categoryThreeButton.setFont(CustomFonts.current_Font_Button);
-        categoryThreeButton.setBackground(CustomCollors.Btn_clr);
+        categoryThreeButton.setBackground(CustomCollors.btn_Clr);
         categoryFourButton.setFont(CustomFonts.current_Font_Button);
-        categoryFourButton.setBackground(CustomCollors.Btn_clr);
+        categoryFourButton.setBackground(CustomCollors.btn_Clr);
         Collections.shuffle(categories);
         categoryOneButton.setText(categories.get(0));
         categoryTwoButton.setText(categories.get(1));
@@ -186,11 +186,11 @@ public class QuizGui extends JFrame implements ActionListener {
 
         mainPanel.removeAll();
         gamePanel.removeAll();
-        mainPanel.setBackground(CustomCollors.Background_clr);
+        mainPanel.setBackground(CustomCollors.background_Clr);
         mainPanel.add(questionLabel, BorderLayout.CENTER);
 
         mainPanel.add(gamePanel, BorderLayout.SOUTH);
-        gamePanel.setBackground(CustomCollors.Background_clr);
+        gamePanel.setBackground(CustomCollors.background_Clr);
         //mainPanel.add(stopwatch,BorderLayout.SOUTH);
 
         textLabelTwo.setText("Game starts now!");
@@ -201,7 +201,7 @@ public class QuizGui extends JFrame implements ActionListener {
         String questionText = allQuestions.get(questionCounter).getQuestionText();
         questionLabel.setText(questionText);
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
-        questionLabel.setFont(CustomFonts.Standard_Sansserif_Label);
+        questionLabel.setFont(CustomFonts.standard_Sansserif_Label);
 
         // Alternativ Listan
         List<String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
@@ -211,7 +211,7 @@ public class QuizGui extends JFrame implements ActionListener {
         for (int i = 0; i < allaAlternativ.size(); i++) {
             JButton alternativBtn = new JButton();
             alternativBtn.setText(allaAlternativ.get(i));
-            alternativBtn.setBackground(CustomCollors.Btn_clr);
+            alternativBtn.setBackground(CustomCollors.btn_Clr);
             alternativBtn.setFont(CustomFonts.current_Font_Button);
             alternativBtn.setFocusable(false);
             alternativBtn.addActionListener(this);
@@ -226,7 +226,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void loadDisconnectMsg() {
         textLabelTwo.setText("The other player disconnected during game start, please restart");
-        textLabelTwo.setForeground(CustomCollors.Error_clr);
+        textLabelTwo.setForeground(CustomCollors.error_Clr);
         startGameBtn.setVisible(false);
     }
 
