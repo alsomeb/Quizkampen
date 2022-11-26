@@ -15,7 +15,7 @@ public class TimerPanel extends JPanel implements ActionListener {
 
     public TimerPanel() {
         setPreferredSize(new Dimension(500,50));
-        setBackground(CustomCollors.Brown);
+        setBackground(CustomCollors.Error_clr);
         timerLabel = new JLabel();
         setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         timerLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));

@@ -65,7 +65,7 @@ public class QuizGui extends JFrame implements ActionListener {
         totalQuestions = amountOfQuestions - 1; // PROPS SETTINGS
         // Welcome Panel
         loadWelcomePanel();
-        startGameBtn.setBackground(CustomCollors.Beigh);
+        startGameBtn.setBackground(CustomCollors.Btn_clr);
 
         // Frame
         this.add(mainPanel);
@@ -161,13 +161,13 @@ public class QuizGui extends JFrame implements ActionListener {
         categoryPanel.add(categoryFourButton);
 
         categoryOneButton.setFont(CustomFonts.current_Font_Button);
-        categoryOneButton.setBackground(CustomCollors.Beigh);
+        categoryOneButton.setBackground(CustomCollors.Btn_clr);
         categoryTwoButton.setFont(CustomFonts.current_Font_Button);
-        categoryTwoButton.setBackground(CustomCollors.Beigh);
+        categoryTwoButton.setBackground(CustomCollors.Btn_clr);
         categoryThreeButton.setFont(CustomFonts.current_Font_Button);
-        categoryThreeButton.setBackground(CustomCollors.Beigh);
+        categoryThreeButton.setBackground(CustomCollors.Btn_clr);
         categoryFourButton.setFont(CustomFonts.current_Font_Button);
-        categoryFourButton.setBackground(CustomCollors.Beigh);
+        categoryFourButton.setBackground(CustomCollors.Btn_clr);
         Collections.shuffle(categories);
         categoryOneButton.setText(categories.get(0));
         categoryTwoButton.setText(categories.get(1));
@@ -201,7 +201,7 @@ public class QuizGui extends JFrame implements ActionListener {
         String questionText = allQuestions.get(questionCounter).getQuestionText();
         questionLabel.setText(questionText);
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
-        questionLabel.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        questionLabel.setFont(CustomFonts.Standard_Sansserif_Label);
 
         // Alternativ Listan
         List<String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
@@ -211,7 +211,7 @@ public class QuizGui extends JFrame implements ActionListener {
         for (int i = 0; i < allaAlternativ.size(); i++) {
             JButton alternativBtn = new JButton();
             alternativBtn.setText(allaAlternativ.get(i));
-            alternativBtn.setBackground(CustomCollors.Beigh);
+            alternativBtn.setBackground(CustomCollors.Btn_clr);
             alternativBtn.setFont(CustomFonts.current_Font_Button);
             alternativBtn.setFocusable(false);
             alternativBtn.addActionListener(this);
@@ -226,7 +226,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     public void loadDisconnectMsg() {
         textLabelTwo.setText("The other player disconnected during game start, please restart");
-        textLabelTwo.setForeground(CustomCollors.Brown);
+        textLabelTwo.setForeground(CustomCollors.Error_clr);
         startGameBtn.setVisible(false);
     }
 
