@@ -1,6 +1,6 @@
 package org.quizkampen.timerpanel;
 
-import org.quizkampen.static_variable.CustomCollors;
+import org.quizkampen.static_variable.CustomColors;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ public class TimerPanel extends JPanel implements ActionListener {
 
     public TimerPanel() {
         setPreferredSize(new Dimension(500,50));
-        setBackground(CustomCollors.error_Clr);
+        setBackground(CustomColors.error_Clr);
         timerLabel = new JLabel();
         setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         timerLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));

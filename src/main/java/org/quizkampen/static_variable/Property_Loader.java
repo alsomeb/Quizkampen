@@ -18,8 +18,8 @@ public class Property_Loader {
             throw new RuntimeException(e);
         }
         String fonts=gui_pr.getProperty      ("fonts","Standard_Sansserif_Button");
-        String backGroundCollor=gui_pr.getProperty ("backGroundCollor","backGroundCopy");
-        String buttonsCollor=gui_pr.getProperty ("buttonsCollor","Copy_Btn_clr");
+        String backGroundColor=gui_pr.getProperty ("backGroundColor","backGroundCopy");
+        String buttonsColor=gui_pr.getProperty ("buttonsColor","Copy_Btn_clr");
 
         //fonts
         if (fonts.trim().equalsIgnoreCase("dialog")){
@@ -38,29 +38,29 @@ public class Property_Loader {
         else CustomFonts.current_Font_Button =CustomFonts.standard_Sansserif_Button;
 
 
-        //backGroundCollor
-        if (backGroundCollor.trim().equalsIgnoreCase("grey")){
-            CustomCollors.background_Clr =CustomCollors.grey;
+        //backGroundColor
+        if (backGroundColor.trim().equalsIgnoreCase("grey")){
+            CustomColors.background_Clr = CustomColors.grey;
         }
-        else if (backGroundCollor.trim().equalsIgnoreCase("deep_Blue")){
-            CustomCollors.background_Clr =CustomCollors.deep_Blue;
+        else if (backGroundColor.trim().equalsIgnoreCase("deep_Blue")){
+            CustomColors.background_Clr = CustomColors.deep_Blue;
         }
-        else if (backGroundCollor.trim().equalsIgnoreCase("ocean_Blue")){
-            CustomCollors.background_Clr =CustomCollors.ocean_Blue;
-        } else if (backGroundCollor.trim().equalsIgnoreCase("dark_Yellow")){
-            CustomCollors.background_Clr =CustomCollors.dark_Yellow;
+        else if (backGroundColor.trim().equalsIgnoreCase("ocean_Blue")){
+            CustomColors.background_Clr = CustomColors.ocean_Blue;
+        } else if (backGroundColor.trim().equalsIgnoreCase("dark_Yellow")){
+            CustomColors.background_Clr = CustomColors.dark_Yellow;
         }
-        else CustomCollors.background_Clr =CustomCollors.backGroundCopy;
+        else CustomColors.background_Clr = CustomColors.backGroundCopy;
 
 
-        //Buttons_Collor
-        if(buttonsCollor.trim().equalsIgnoreCase("light_Button")){
-            CustomCollors.btn_Clr =CustomCollors.light_Button;
-        } else if (buttonsCollor.trim().equalsIgnoreCase("light_Button2")){
-            CustomCollors.btn_Clr =CustomCollors.light_Button2;
-        } else if (buttonsCollor.trim().equalsIgnoreCase("darker_Green")){
-            CustomCollors.btn_Clr =CustomCollors.darker_Green;
-        }else CustomCollors.btn_Clr =CustomCollors.btn_Clr_Copy;
+        //Buttons_Color
+        if(buttonsColor.trim().equalsIgnoreCase("light_Button")){
+            CustomColors.btn_Clr = CustomColors.light_Button;
+        } else if (buttonsColor.trim().equalsIgnoreCase("light_Button2")){
+            CustomColors.btn_Clr = CustomColors.light_Button2;
+        } else if (buttonsColor.trim().equalsIgnoreCase("darker_Green")){
+            CustomColors.btn_Clr = CustomColors.darker_Green;
+        }else CustomColors.btn_Clr = CustomColors.btn_Clr_Copy;
 
     }
 }

@@ -2,7 +2,7 @@ package org.quizkampen.static_variable;
 
 import java.awt.*;
 
-public class CustomCollors {
+public class CustomColors {
     //--------------------------------------------------Default used Colors---------------------------------------------
     public static final Color backGroundCopy = new Color     (249, 250, 244);
     public static Color btn_Clr_Copy = new Color             (224, 216, 176);
