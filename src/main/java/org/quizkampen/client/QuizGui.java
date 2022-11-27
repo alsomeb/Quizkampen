@@ -23,7 +23,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     Timer timer=new Timer();
 
-    private TimerPanel stopwatch=new TimerPanel();
+    private final TimerPanel stopwatch=new TimerPanel();
     private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
@@ -54,7 +54,7 @@ public class QuizGui extends JFrame implements ActionListener {
     private int amountOfQuestions;
 
     private Map<String, List<Integer>> playerScore;
-    private Properties p = new Properties();
+    private final Properties p = new Properties();
 
     private JLabel currentScoreLabel = new JLabel();
     private JTextArea currentScoreArea = new JTextArea(40, 40);
@@ -82,7 +82,7 @@ public class QuizGui extends JFrame implements ActionListener {
         this.add(mainPanel);
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(welcomePanel, BorderLayout.CENTER);
-        this.setSize(CustomSizes.WIDTH, CustomSizes.HEIGHT);
+        this.setSize(CustomSizes.width, CustomSizes.height);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

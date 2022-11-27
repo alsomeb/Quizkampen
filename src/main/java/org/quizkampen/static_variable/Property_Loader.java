@@ -17,15 +17,23 @@ public class Property_Loader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String fontsButton=gui_pr.getProperty      ("fontsButton","Standard_Sansserif_Button");
+        String fonts=gui_pr.getProperty      ("fonts","Standard_Sansserif_Button");
         String backGroundCollor=gui_pr.getProperty ("backGroundCollor","backGroundCopy");
         String buttonsCollor=gui_pr.getProperty ("buttonsCollor","Copy_Btn_clr");
 
-        //Fonts
-        if (fontsButton.trim().equalsIgnoreCase("dialog")){
-            CustomFonts.current_Font_Button =CustomFonts.dialog;
-        } else if (fontsButton.trim().equalsIgnoreCase("monospace")) {
-            CustomFonts.current_Font_Button =CustomFonts.monospace;
+        //fonts
+        if (fonts.trim().equalsIgnoreCase("dialog")){
+            CustomFonts.current_Font_Button =CustomFonts.dialog_Button;
+            CustomFonts.current_Font_Label=CustomFonts.dialog_Label;
+        } else if (fonts.trim().equalsIgnoreCase("monospace")) {
+            CustomFonts.current_Font_Button =CustomFonts.monospace_Button;
+            CustomFonts.current_Font_Label=CustomFonts.monospace_Label;
+        } else if (fonts.trim().equalsIgnoreCase("serif")) {
+            CustomFonts.current_Font_Button =CustomFonts.serifButton;
+            CustomFonts.current_Font_Label=CustomFonts.serif_Label;
+        }else if (fonts.trim().equalsIgnoreCase("dialog_Input")) {
+            CustomFonts.current_Font_Button =CustomFonts.dialog_Input_Button;
+            CustomFonts.current_Font_Label=CustomFonts.dialog_Input_Label;
         }
         else CustomFonts.current_Font_Button =CustomFonts.standard_Sansserif_Button;
 
@@ -52,7 +60,7 @@ public class Property_Loader {
             CustomCollors.btn_Clr =CustomCollors.light_Button2;
         } else if (buttonsCollor.trim().equalsIgnoreCase("darker_Green")){
             CustomCollors.btn_Clr =CustomCollors.darker_Green;
-        }else CustomCollors.btn_Clr =CustomCollors.copy_Btn_Clr;
+        }else CustomCollors.btn_Clr =CustomCollors.btn_Clr_Copy;
 
     }
 }
