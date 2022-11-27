@@ -5,7 +5,7 @@ import org.quizkampen.server.Questions;
 import org.quizkampen.static_variable.CustomCollors;
 import org.quizkampen.static_variable.CustomFonts;
 import org.quizkampen.static_variable.CustomSizes;
-import org.quizkampen.static_variable.Pr;
+import org.quizkampen.static_variable.Property_Loader;
 import org.quizkampen.timerpanel.TimerPanel;
 
 import javax.swing.*;
@@ -17,8 +17,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
+import java.util.Timer;
 
 public class QuizGui extends JFrame implements ActionListener {
+
+    Timer timer=new Timer();
+
     private TimerPanel stopwatch=new TimerPanel();
     private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
@@ -77,7 +81,7 @@ public class QuizGui extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setTitle("Quizkampen");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Pr.loadproperty();
+        Property_Loader.loadproperty();
     }
     private void loadProps() {
         try {
@@ -241,6 +245,13 @@ public class QuizGui extends JFrame implements ActionListener {
             System.out.println("Next player turn");
         }
     }
+    //the timer that delayes panel changes so user can see the correct/Wrong answer
+    TimerTask timerTask=new TimerTask() {
+        @Override
+        public void run() {
+            checkIfMoreQuestions();
+        }
+    };
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
@@ -316,13 +327,14 @@ public class QuizGui extends JFrame implements ActionListener {
                 selectedBtn.setBackground(Color.GREEN);
 
                 outputStream.println("correct");
-
+                //timer.schedule(timerTask, 2500);
                 checkIfMoreQuestions();
             } else {
                 System.out.println("wrong");
                 outputStream.println("wrong");
                 selectedBtn.setBackground(Color.RED);
-                checkIfMoreQuestions();
+                //timer.schedule(timerTask, 2500);
+                 checkIfMoreQuestions();
             }
 
         }

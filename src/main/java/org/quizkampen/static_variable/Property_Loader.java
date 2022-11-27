@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Pr {
+public class Property_Loader {
 
     public final static void loadproperty(){
         Properties gui_pr=new Properties();
