@@ -342,17 +342,17 @@ public class QuizGui extends JFrame implements ActionListener {
 
             if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
                 System.out.println("Du svara rätt!");
-                selectedBtn.setBackground(Color.GREEN);
+                selectedBtn.setBackground(CustomColors.right);
                 outputStream.println("correct");
                 timer20.start();
             } else {
                 System.out.println("wrong");
                 outputStream.println("wrong");
-                selectedBtn.setBackground(Color.RED);
+                selectedBtn.setBackground(CustomColors.wrong);
                 System.out.println(currentRightAnswer);
                 for (JButton b : answerBtnList) {
                     if (b.getText().equalsIgnoreCase(currentRightAnswer)){
-                        b.setBackground(Color.GREEN);
+                        b.setBackground(CustomColors.right);
                     }
                 }
 

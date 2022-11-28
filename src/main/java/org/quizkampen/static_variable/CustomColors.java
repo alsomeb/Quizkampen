@@ -8,7 +8,7 @@ public class CustomColors {
     public static Color btn_Clr_Copy = new Color             (224, 216, 176);
     //------------------------------------------------------------------------------------------------------------------
     public static final Color wrong = new Color              (235, 29, 54);
-    public static final Color Right = new Color              (48, 110, 58);
+    public static final Color right = new Color              (89, 215, 110);
 
     public static Color darker_Green = new Color             (148, 180, 159);
 
