@@ -21,11 +21,11 @@ import java.util.List;
 
 public class QuizGui extends JFrame implements ActionListener {
 
-    List<JButton> answerBtnList =new ArrayList<>();
+    private List<JButton> answerBtnList = new ArrayList<>();
     //private final javax.swing.Timer timer20=new javax.swing.Timer(1500, e -> {checkIfMoreQuestions(); });
-    private final Timer timer20=new Timer(1500, e -> {checkIfMoreQuestions(); });
+    private final Timer timer20 = new Timer(1500, e -> {checkIfMoreQuestions(); });
 
-    private final TimerPanel stopwatch=new TimerPanel();
+    private final TimerPanel stopwatch = new TimerPanel();
     private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
