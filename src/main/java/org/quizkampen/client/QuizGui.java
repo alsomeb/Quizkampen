@@ -34,7 +34,6 @@ public class QuizGui extends JFrame implements ActionListener {
     private final JLabel textLabelOne = new JLabel("Waiting for 1 more player");
     private final JLabel textLabelTwo = new JLabel("Welcome to Quizkampen!");
     private final JLabel questionLabel = new JLabel();
-    private final JButton startGameBtn = new JButton("Find a game for me");
 
 
     private final JButton categoryOneButton = new JButton("Category 1");
@@ -76,7 +75,6 @@ public class QuizGui extends JFrame implements ActionListener {
         totalQuestions = amountOfQuestions - 1; // PROPS SETTINGS
         // Welcome Panel
         loadWelcomePanel();
-        startGameBtn.setBackground(CustomColors.btn_Clr);
 
         // Frame
         this.add(mainPanel);
@@ -104,13 +102,9 @@ public class QuizGui extends JFrame implements ActionListener {
         welcomePanel.setLayout(new GridBagLayout());
         // Label
         textLabelTwo.setFont(CustomFonts.current_Font_Label);
-        // Button
-        startGameBtn.setFocusable(false);
-        startGameBtn.setFont(CustomFonts.current_Font_Label);
-        startGameBtn.addActionListener(this);
+
 
         welcomePanel.add(textLabelTwo);
-        welcomePanel.add(startGameBtn);
         repaint();
         revalidate();
     }
@@ -256,7 +250,7 @@ public class QuizGui extends JFrame implements ActionListener {
     public void loadDisconnectMsg() {
         textLabelTwo.setText("The other player disconnected during game start, please restart");
         textLabelTwo.setForeground(CustomColors.error_Clr);
-        startGameBtn.setVisible(false);
+
     }
 
     public void checkIfMoreQuestions() {
@@ -271,7 +265,7 @@ public class QuizGui extends JFrame implements ActionListener {
         }
     }
     //the timer that delayes panel changes so user can see the correct/Wrong answer
-    /*TimerTask timerTask=new TimerTask() {
+   /* TimerTask timerTask=new TimerTask() {
         @Override
         public void run() {
             checkIfMoreQuestions();
@@ -321,9 +315,7 @@ public class QuizGui extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton selectedBtn = (JButton) e.getSource();
 
-        if (e.getSource() == startGameBtn) {
-            loadWaitingRoomPanel();
-        }
+
         if (e.getSource() == categoryOneButton) {
             response = categoryOneButton.getText();
             outputStream.println(response);

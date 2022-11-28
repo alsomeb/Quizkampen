@@ -59,6 +59,7 @@ public class Client {
                 }
                 if (response.getQuestions() != null && !response.isGameIsOver()) {
                     System.out.println(response.getQuestions());
+
                     gui.setCurrentQuestions(response.getQuestions());
                     gui.loadGamePanel();
                 }
