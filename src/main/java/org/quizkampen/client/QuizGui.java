@@ -7,8 +7,9 @@ import org.quizkampen.static_variable.CustomFonts;
 import org.quizkampen.static_variable.CustomSizes;
 import org.quizkampen.static_variable.Property_Loader;
 import org.quizkampen.timerpanel.TimerPanel;
-
 import javax.swing.*;
+import javax.swing.Timer;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
-import java.util.Timer;
 
 public class QuizGui extends JFrame implements ActionListener {
 
-    Timer timer=new Timer();
+    List<JButton> answerBtnList =new ArrayList<>();
+    //private final javax.swing.Timer timer20=new javax.swing.Timer(1500, e -> {checkIfMoreQuestions(); });
+    private final Timer timer20=new Timer(1500, e -> {checkIfMoreQuestions(); });
 
     private final TimerPanel stopwatch=new TimerPanel();
     private final JPanel mainPanel = new JPanel();
@@ -227,7 +229,7 @@ public class QuizGui extends JFrame implements ActionListener {
         questionLabel.setFont(CustomFonts.standard_Sansserif_Label);
 
         // Alternativ Listan
-        List<String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
+        List <String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
         Collections.shuffle(allaAlternativ);
 
         // Loopar igenom alla alternativ och målar upp knapparna
@@ -238,6 +240,7 @@ public class QuizGui extends JFrame implements ActionListener {
             alternativBtn.setFont(CustomFonts.current_Font_Button);
             alternativBtn.setFocusable(false);
             alternativBtn.addActionListener(this);
+            answerBtnList.add(alternativBtn);
             gamePanel.add(alternativBtn);
             gamePanel.add(Box.createHorizontalStrut(15));
             gamePanel.add(Box.createVerticalStrut(300));
@@ -257,20 +260,15 @@ public class QuizGui extends JFrame implements ActionListener {
         if (questionCounter < totalQuestions) {
             questionCounter++;
             loadGamePanel();
+            timer20.stop();
         } else {
             // skicka starta player 2 ? sätt player 1 i waiting room.
             loadWaitingRoomPanel();
+            timer20.stop();
             outputStream.println("switch");
             System.out.println("Next player turn");
         }
     }
-    //the timer that delayes panel changes so user can see the correct/Wrong answer
-   /* TimerTask timerTask=new TimerTask() {
-        @Override
-        public void run() {
-            checkIfMoreQuestions();
-        }
-    };*/
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
@@ -345,16 +343,20 @@ public class QuizGui extends JFrame implements ActionListener {
             if (selectedBtn.getText().equalsIgnoreCase(currentRightAnswer)) {
                 System.out.println("Du svara rätt!");
                 selectedBtn.setBackground(Color.GREEN);
-
                 outputStream.println("correct");
-                //timer.schedule(timerTask, 2500);
-                checkIfMoreQuestions();
+                timer20.start();
             } else {
                 System.out.println("wrong");
                 outputStream.println("wrong");
                 selectedBtn.setBackground(Color.RED);
-                //timer.schedule(timerTask, 2500);
-                 checkIfMoreQuestions();
+                System.out.println(currentRightAnswer);
+                for (JButton b : answerBtnList) {
+                    if (b.getText().equalsIgnoreCase(currentRightAnswer)){
+                        b.setBackground(Color.GREEN);
+                    }
+                }
+
+                timer20.start();
             }
 
         }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Client {
     private QuizGui gui;
@@ -15,6 +17,7 @@ public class Client {
     private final String serverAdress = "127.0.0.1";
     private PrintWriter out;
     private ObjectInputStream in;
+
 
     public Client() throws IOException, ClassNotFoundException {
         gui = new QuizGui();
