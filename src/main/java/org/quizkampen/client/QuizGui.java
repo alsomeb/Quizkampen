@@ -23,7 +23,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     private List<JButton> answerBtnList = new ArrayList<>();
     //private final javax.swing.Timer timer20=new javax.swing.Timer(1500, e -> {checkIfMoreQuestions(); });
-    private final Timer timer20 = new Timer(1500, e -> {checkIfMoreQuestions(); });
+    private final Timer timer = new Timer(350, e -> {checkIfMoreQuestions(); });
 
     private final TimerPanel stopwatch = new TimerPanel();
     private final JPanel mainPanel = new JPanel();
@@ -260,11 +260,11 @@ public class QuizGui extends JFrame implements ActionListener {
         if (questionCounter < totalQuestions) {
             questionCounter++;
             loadGamePanel();
-            timer20.stop();
+            timer.stop();
         } else {
             // skicka starta player 2 ? sätt player 1 i waiting room.
             loadWaitingRoomPanel();
-            timer20.stop();
+            timer.stop();
             outputStream.println("switch");
             System.out.println("Next player turn");
         }
@@ -344,7 +344,7 @@ public class QuizGui extends JFrame implements ActionListener {
                 System.out.println("Du svara rätt!");
                 selectedBtn.setBackground(CustomColors.right);
                 outputStream.println("correct");
-                timer20.start();
+                timer.start();
             } else {
                 System.out.println("wrong");
                 outputStream.println("wrong");
@@ -356,7 +356,7 @@ public class QuizGui extends JFrame implements ActionListener {
                     }
                 }
 
-                timer20.start();
+                timer.start();
             }
 
         }
