@@ -145,7 +145,7 @@ public class QuizGui extends JFrame implements ActionListener {
             currentScoreArea.setFont(CustomFonts.current_Font_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
-            currentScoreArea.append("\t"+"      Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
+            currentScoreArea.append("\t"+"\t"+"Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
             resultPanel.add(scrollPain);
             revalidate();
             repaint();
@@ -159,9 +159,9 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.add(resultPanel);
 
         JLabel player1 = new JLabel("Player 1 total: " + totalEndScore.get(0));
-        player1.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        player1.setFont(CustomFonts.standard_Sansserif_Label);
         JLabel player2 = new JLabel("Player 2 total: " + totalEndScore.get(1));
-        player2.setFont(new Font("Sans-serif", Font.BOLD, 22));
+        player2.setFont(CustomFonts.standard_Sansserif_Label);
 
         resultPanel.add(player1);
         resultPanel.add(Box.createHorizontalStrut(40));
