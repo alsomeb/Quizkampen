@@ -36,7 +36,7 @@ public class Client {
 
         while ((msgFromServer = in.readObject()) != null) {
             if (msgFromServer instanceof Initiator initiator) {
-                if (initiator.allConnected() ) {
+                if (initiator.allConnected()) {
                     System.out.println("All connected, game starts");
                     gui.loadWaitingRoomPanel();
                     gui.setWaitingRoomMsg("Waiting for your turn");
@@ -47,7 +47,7 @@ public class Client {
             }
 
             if (msgFromServer instanceof Response response) {
-                if(response.isGameIsOver()) {
+                if (response.isGameIsOver()) {
                     gui.setTotalEndScore(response.getTotalScore());
                     gui.loadGameOverPanel();
                     System.out.println("Slut res received");
@@ -64,8 +64,8 @@ public class Client {
                     gui.setCurrentQuestions(response.getQuestions());
                     gui.loadGamePanel();
                 }
-                if(response.roundIsOver() && !response.isGameIsOver()) {
-                    if(response.getPlayerScores() != null) {
+                if (response.roundIsOver() && !response.isGameIsOver()) {
+                    if (response.getPlayerScores() != null) {
                         gui.setPlayerScore(response.getPlayerScores());
                         System.out.println(response.getPlayerScores());
                         gui.loadResultPanel();

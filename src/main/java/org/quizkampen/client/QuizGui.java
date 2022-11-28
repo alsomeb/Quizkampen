@@ -7,6 +7,7 @@ import org.quizkampen.static_variable.CustomFonts;
 import org.quizkampen.static_variable.CustomSizes;
 import org.quizkampen.static_variable.Property_Loader;
 import org.quizkampen.timerpanel.TimerPanel;
+
 import javax.swing.*;
 import javax.swing.Timer;
 
@@ -22,7 +23,9 @@ import java.util.List;
 public class QuizGui extends JFrame implements ActionListener {
 
     private List<JButton> answerBtnList = new ArrayList<>();
-    private final Timer timer = new Timer(300, e -> {checkIfMoreQuestions(); });
+    private final Timer timer = new Timer(300, e -> {
+        checkIfMoreQuestions();
+    });
     private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
@@ -87,6 +90,7 @@ public class QuizGui extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Property_Loader.loadproperty();
     }
+
     private void loadProps() {
         try {
             p.load(new FileInputStream("src/main/resources/game.properties"));
@@ -122,7 +126,8 @@ public class QuizGui extends JFrame implements ActionListener {
         repaint();
         revalidate();
     }
-    public void loadResultPanel(){
+
+    public void loadResultPanel() {
         mainPanel.removeAll();
         mainPanel.add(resultPanel);
         resultPanel.setBackground(CustomColors.background_Clr);
@@ -138,15 +143,16 @@ public class QuizGui extends JFrame implements ActionListener {
             currentScoreArea.setFont(CustomFonts.current_Font_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
-            currentScoreArea.append("\t"+"      Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
-            scrollPain.setBorder(BorderFactory.createLineBorder(CustomColors.btn_Clr_Copy,2));
+            currentScoreArea.append("\t" + "      Round " + (i + 1) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n" + "\n" + "\n" + "\n");
+            scrollPain.setBorder(BorderFactory.createLineBorder(CustomColors.btn_Clr_Copy, 2));
             resultPanel.add(scrollPain);
             revalidate();
             repaint();
         }
 
     }
-    public void loadGameOverPanel(){
+
+    public void loadGameOverPanel() {
         mainPanel.removeAll();
         resultPanel.removeAll();
         resultPanel.setLayout(new GridBagLayout());
@@ -226,7 +232,7 @@ public class QuizGui extends JFrame implements ActionListener {
         questionLabel.setFont(CustomFonts.standard_Sansserif_Label);
 
         // Alternativ Listan
-        List <String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
+        List<String> allaAlternativ = allQuestions.get(questionCounter).getAnswers();
         Collections.shuffle(allaAlternativ);
 
         // Loopar igenom alla alternativ och målar upp knapparna
@@ -348,7 +354,7 @@ public class QuizGui extends JFrame implements ActionListener {
                 selectedBtn.setBackground(CustomColors.wrong);
                 System.out.println(currentRightAnswer);
                 for (JButton b : answerBtnList) {
-                    if (b.getText().equalsIgnoreCase(currentRightAnswer)){
+                    if (b.getText().equalsIgnoreCase(currentRightAnswer)) {
                         b.setBackground(CustomColors.right);
                     }
                 }

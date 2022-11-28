@@ -135,7 +135,7 @@ public class GameService extends Thread {
                 }
 
                 if (msgFromClient.equalsIgnoreCase("switch") && !roundOver) {
-                    if ((totalRoundsPlayers / 2) < amountOfRounds ) {
+                    if ((totalRoundsPlayers / 2) < amountOfRounds) {
                         System.out.println(msgFromClient);
                         // Mellan lagring
                         tempPlayer = nonActivePlayer;
@@ -149,7 +149,7 @@ public class GameService extends Thread {
                 }
 
                 // om båda spelat 1 gång, ge runda resultat (DENNA HOPPAR IN NU KORREKT)
-                if(totalRoundsPlayers % 2 == 0 && roundOver) {
+                if (totalRoundsPlayers % 2 == 0 && roundOver) {
                     System.out.println("MODULUS SKIT BYTER STATE 5");
                     state = 5;
                     roundOver = false; // resetta den boolean
@@ -183,7 +183,7 @@ public class GameService extends Thread {
                 System.out.println(quizPlayer2.getTotalScore() + " Player 2 scores");
 
                 System.out.println(msgFromClient);
-                if(msgFromClient.equalsIgnoreCase("switch")) {
+                if (msgFromClient.equalsIgnoreCase("switch")) {
                     state = 6;
                 }
             }
