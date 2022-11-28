@@ -22,10 +22,7 @@ import java.util.List;
 public class QuizGui extends JFrame implements ActionListener {
 
     private List<JButton> answerBtnList = new ArrayList<>();
-    //private final javax.swing.Timer timer20=new javax.swing.Timer(1500, e -> {checkIfMoreQuestions(); });
     private final Timer timer = new Timer(300, e -> {checkIfMoreQuestions(); });
-
-    private final TimerPanel stopwatch = new TimerPanel();
     private final JPanel mainPanel = new JPanel();
     private final JPanel welcomePanel = new JPanel();
     private final JPanel waitingRoomPanel = new JPanel();
@@ -217,7 +214,6 @@ public class QuizGui extends JFrame implements ActionListener {
         mainPanel.setBackground(CustomColors.background_Clr);
         mainPanel.add(questionLabel, BorderLayout.CENTER);
         gamePanel.setBackground(CustomColors.background_Clr);
-        //mainPanel.add(stopwatch,BorderLayout.SOUTH);
 
         textLabelTwo.setText("Game starts now!");
         gamePanel.setLayout(new GridBagLayout());
