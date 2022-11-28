@@ -23,7 +23,7 @@ public class QuizGui extends JFrame implements ActionListener {
 
     private List<JButton> answerBtnList = new ArrayList<>();
     //private final javax.swing.Timer timer20=new javax.swing.Timer(1500, e -> {checkIfMoreQuestions(); });
-    private final Timer timer = new Timer(350, e -> {checkIfMoreQuestions(); });
+    private final Timer timer = new Timer(300, e -> {checkIfMoreQuestions(); });
 
     private final TimerPanel stopwatch = new TimerPanel();
     private final JPanel mainPanel = new JPanel();
@@ -141,7 +141,8 @@ public class QuizGui extends JFrame implements ActionListener {
             currentScoreArea.setFont(CustomFonts.current_Font_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
-            currentScoreArea.append("\t"+"\t"+"Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
+            currentScoreArea.append("\t"+"      Round "+ (i +1 ) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n"+"\n"+"\n"+"\n");
+            scrollPain.setBorder(BorderFactory.createLineBorder(CustomColors.btn_Clr_Copy,2));
             resultPanel.add(scrollPain);
             revalidate();
             repaint();
