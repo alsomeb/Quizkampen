@@ -30,6 +30,6 @@ public class CustomColors {
     //------------------------------------------------------------------------------------------------------------------
 
 
-    public static final Color button_Prsssed = new Color     (51, 105, 119);
+    public static final Color buttonPressed = new Color     (51, 105, 119);
 
 }
