@@ -173,14 +173,7 @@ public class QuizGui extends JFrame implements ActionListener {
         resultPanel.setLayout(new BorderLayout());
         mainPanel.add(resultPanel);
 
-        // Player's Score
-/*        JLabel player1 = new JLabel("Player 1 total: " + totalEndScore.get(0));
-        //player1.setHorizontalAlignment(JLabel.LEFT);
-        player1.setFont(CustomFonts.standard_Sansserif_Label);
-        JLabel player2 = new JLabel("Player 2 total: " + totalEndScore.get(1));
-        //player2.setHorizontalAlignment(JLabel.RIGHT);
-        player2.setFont(CustomFonts.standard_Sansserif_Label);*/
-
+        // Scores
         JLabel resultScore = new JLabel("Player 1: " + totalEndScore.get(0) + "   -    Player 2: " + totalEndScore.get(1));
         resultScore.setPreferredSize(new Dimension(CustomSizes.width, 100));
         resultScore.setFont(new Font("Sans-serif", Font.BOLD, 25));
@@ -192,11 +185,17 @@ public class QuizGui extends JFrame implements ActionListener {
         winnerLabel.setFont(new Font("Sans-serif", Font.BOLD, 40));
         winnerLabel.setForeground(Color.decode("#E97777"));
 
-/*        resultPanel.add(player1, BorderLayout.NORTH);
-        //resultPanel.add(Box.createHorizontalStrut(40));
-        resultPanel.add(player2, BorderLayout.NORTH);*/
+        // EXIT GAME BUTTON
+        JButton exitBtn = new JButton("Exit game");
+        exitBtn.setFocusable(false);
+        exitBtn.setBackground(CustomColors.ocean_Blue);
+        exitBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        exitBtn.setPreferredSize(new Dimension(CustomSizes.width, 100));
+        exitBtn.addActionListener(listener -> System.exit(0));
+
         resultPanel.add(resultScore, BorderLayout.NORTH);
         resultPanel.add(winnerLabel, BorderLayout.CENTER);
+        resultPanel.add(exitBtn, BorderLayout.SOUTH);
         revalidate();
         repaint();
     }
