@@ -188,6 +188,7 @@ public class QuizGui extends JFrame implements ActionListener {
         // EXIT GAME BUTTON
         JButton exitBtn = new JButton("Exit game");
         exitBtn.setFocusable(false);
+        exitBtn.setFont(new Font ("MONOSPACED", Font.BOLD, 40));
         exitBtn.setBackground(CustomColors.ocean_Blue);
         exitBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         exitBtn.setPreferredSize(new Dimension(CustomSizes.width, 100));

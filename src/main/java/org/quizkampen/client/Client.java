@@ -10,7 +10,7 @@ import java.net.Socket;
 
 public class Client {
     private QuizGui gui;
-    private final int port = 12345;
+    private final int port = 12344;
     private Socket socket;
     private final String serverAdress = "127.0.0.1";
     private PrintWriter out;

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class ServerListener {
-    private final int port = 12345;
+    private final int port = 12344;
     private ServerSocket serverSocket;
 
     public ServerListener() throws IOException {
