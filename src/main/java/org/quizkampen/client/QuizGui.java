@@ -6,7 +6,6 @@ import org.quizkampen.static_variable.CustomColors;
 import org.quizkampen.static_variable.CustomFonts;
 import org.quizkampen.static_variable.CustomSizes;
 import org.quizkampen.static_variable.Property_Loader;
-import org.quizkampen.timerpanel.TimerPanel;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -54,11 +53,13 @@ public class QuizGui extends JFrame implements ActionListener {
     private String response;
     private int amountOfQuestions;
 
+    private String playerName;
+
     private Map<String, List<Integer>> playerScore;
     private final Properties p = new Properties();
 
     private JLabel currentScoreLabel = new JLabel();
-    private JTextArea currentScoreArea = new JTextArea(40, 40);
+    private JTextArea currentScoreArea = new JTextArea(23, 60);
     private JScrollPane scrollPain = new JScrollPane(currentScoreArea);
 
     private List<Integer> player1Scores;
@@ -143,7 +144,7 @@ public class QuizGui extends JFrame implements ActionListener {
             currentScoreArea.setFont(CustomFonts.current_Font_Label);
             currentScoreArea.setLineWrap(true);
             currentScoreArea.setEditable(false);
-            currentScoreArea.append("\t" + "      Round " + (i + 1) + ": " + player1Scores.get(i) + " - " + player2Scores.get(i) + "\n" + "\n" + "\n" + "\n");
+            currentScoreArea.append("\t" + "      Round " + (i + 1) + ": " + "Player 1: " + player1Scores.get(i) + " - " + "Player 2: " + player2Scores.get(i) + "\n" + "\n" + "\n" + "\n");
             scrollPain.setBorder(BorderFactory.createLineBorder(CustomColors.btn_Clr_Copy, 2));
             resultPanel.add(scrollPain);
             revalidate();
@@ -152,20 +153,50 @@ public class QuizGui extends JFrame implements ActionListener {
 
     }
 
+    private String setWinnerText() {
+        String winnerText = "";
+
+        if (totalEndScore.get(0) > totalEndScore.get(1)) {
+            winnerText = "Player 1 Wins";
+        } else if (totalEndScore.get(1) > totalEndScore.get(0)) {
+            winnerText = "Player 2 Wins";
+        } else {
+            winnerText = "It's a Draw!";
+        }
+
+        return winnerText;
+    }
+
     public void loadGameOverPanel() {
         mainPanel.removeAll();
         resultPanel.removeAll();
-        resultPanel.setLayout(new GridBagLayout());
+        resultPanel.setLayout(new BorderLayout());
         mainPanel.add(resultPanel);
 
-        JLabel player1 = new JLabel("Player 1 total: " + totalEndScore.get(0));
+        // Player's Score
+/*        JLabel player1 = new JLabel("Player 1 total: " + totalEndScore.get(0));
+        //player1.setHorizontalAlignment(JLabel.LEFT);
         player1.setFont(CustomFonts.standard_Sansserif_Label);
         JLabel player2 = new JLabel("Player 2 total: " + totalEndScore.get(1));
-        player2.setFont(CustomFonts.standard_Sansserif_Label);
+        //player2.setHorizontalAlignment(JLabel.RIGHT);
+        player2.setFont(CustomFonts.standard_Sansserif_Label);*/
 
-        resultPanel.add(player1);
-        resultPanel.add(Box.createHorizontalStrut(40));
-        resultPanel.add(player2);
+        JLabel resultScore = new JLabel("Player 1: " + totalEndScore.get(0) + "   -    Player 2: " + totalEndScore.get(1));
+        resultScore.setPreferredSize(new Dimension(CustomSizes.width, 100));
+        resultScore.setFont(new Font("Sans-serif", Font.BOLD, 25));
+        resultScore.setHorizontalAlignment(JLabel.CENTER);
+
+        // The winner Label
+        JLabel winnerLabel = new JLabel(setWinnerText());
+        winnerLabel.setHorizontalAlignment(JLabel.CENTER);
+        winnerLabel.setFont(new Font("Sans-serif", Font.BOLD, 40));
+        winnerLabel.setForeground(Color.decode("#E97777"));
+
+/*        resultPanel.add(player1, BorderLayout.NORTH);
+        //resultPanel.add(Box.createHorizontalStrut(40));
+        resultPanel.add(player2, BorderLayout.NORTH);*/
+        resultPanel.add(resultScore, BorderLayout.NORTH);
+        resultPanel.add(winnerLabel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
@@ -271,6 +302,13 @@ public class QuizGui extends JFrame implements ActionListener {
             outputStream.println("switch");
             System.out.println("Next player turn");
         }
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+        this.setTitle(playerName);
+        revalidate();
+        repaint();
     }
 
     public void setCategories(List<String> categories) {

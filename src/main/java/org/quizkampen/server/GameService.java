@@ -38,12 +38,12 @@ public class GameService extends Thread {
 
     private boolean checkAllConnected() {
         if (quizPlayer1.getOut() == null) {
-            quizPlayer2.sendResponseToClient(new Initiator(false));
+            quizPlayer2.sendResponseToClient(new Initiator(false, "Player 2"));
             return false;
         }
 
         if (quizPlayer2.getOut() == null) {
-            quizPlayer1.sendResponseToClient(new Initiator(false));
+            quizPlayer1.sendResponseToClient(new Initiator(false, "Player 1"));
             return false;
         }
 
@@ -69,8 +69,8 @@ public class GameService extends Thread {
             if (state == 0) {
                 System.out.println("PROPS TOTAL ROUNDS TO PLAY: " + amountOfRounds);
                 System.out.println("Startar state 0");
-                quizPlayer1.sendResponseToClient(new Initiator(true));
-                quizPlayer2.sendResponseToClient(new Initiator(true));
+                quizPlayer1.sendResponseToClient(new Initiator(true, "Player 1"));
+                quizPlayer2.sendResponseToClient(new Initiator(true, "Player 2"));
                 state++;
                 System.out.println("testar state initial");
             }
