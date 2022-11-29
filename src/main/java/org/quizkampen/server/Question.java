@@ -8,7 +8,7 @@ public class Question implements Serializable {
     private final String rightAnswer;
     private final ArrayList<String> answers = new ArrayList<>();
 
-    public Question (String question, String rightAnswer, String wrongAnswerOne,
+    public Question(String question, String rightAnswer, String wrongAnswerOne,
                     String wrongAnswerTwo, String wrongAnswerThree) {
         this.questionText = question;
         this.rightAnswer = rightAnswer;

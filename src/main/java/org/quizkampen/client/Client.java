@@ -10,11 +10,12 @@ import java.net.Socket;
 
 public class Client {
     private QuizGui gui;
-    private final int port = 12345;
+    private final int port = 12344;
     private Socket socket;
     private final String serverAdress = "127.0.0.1";
     private PrintWriter out;
     private ObjectInputStream in;
+
 
     public Client() throws IOException, ClassNotFoundException {
         gui = new QuizGui();
@@ -35,18 +36,19 @@ public class Client {
 
         while ((msgFromServer = in.readObject()) != null) {
             if (msgFromServer instanceof Initiator initiator) {
-                if (initiator.allConnected() ) {
+                if (initiator.allConnected()) {
                     System.out.println("All connected, game starts");
                     gui.loadWaitingRoomPanel();
                     gui.setWaitingRoomMsg("Waiting for your turn");
+                    gui.setPlayerName(initiator.playerName());
                 } else {
                     gui.loadDisconnectMsg();
-                    System.out.println("Other part Disconnected, restart this client");
+                    System.out.println("Other player Disconnected, restart this client");
                 }
             }
 
             if (msgFromServer instanceof Response response) {
-                if(response.isGameIsOver()) {
+                if (response.isGameIsOver()) {
                     gui.setTotalEndScore(response.getTotalScore());
                     gui.loadGameOverPanel();
                     System.out.println("Slut res received");
@@ -59,11 +61,12 @@ public class Client {
                 }
                 if (response.getQuestions() != null && !response.isGameIsOver()) {
                     System.out.println(response.getQuestions());
+
                     gui.setCurrentQuestions(response.getQuestions());
                     gui.loadGamePanel();
                 }
-                if(response.roundIsOver() && !response.isGameIsOver()) {
-                    if(response.getPlayerScores() != null) {
+                if (response.roundIsOver() && !response.isGameIsOver()) {
+                    if (response.getPlayerScores() != null) {
                         gui.setPlayerScore(response.getPlayerScores());
                         System.out.println(response.getPlayerScores());
                         gui.loadResultPanel();

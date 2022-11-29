@@ -38,12 +38,12 @@ public class GameService extends Thread {
 
     private boolean checkAllConnected() {
         if (quizPlayer1.getOut() == null) {
-            quizPlayer2.sendResponseToClient(new Initiator(false));
+            quizPlayer2.sendResponseToClient(new Initiator(false, "Player 2"));
             return false;
         }
 
         if (quizPlayer2.getOut() == null) {
-            quizPlayer1.sendResponseToClient(new Initiator(false));
+            quizPlayer1.sendResponseToClient(new Initiator(false, "Player 1"));
             return false;
         }
 
@@ -69,8 +69,8 @@ public class GameService extends Thread {
             if (state == 0) {
                 System.out.println("PROPS TOTAL ROUNDS TO PLAY: " + amountOfRounds);
                 System.out.println("Startar state 0");
-                quizPlayer1.sendResponseToClient(new Initiator(true));
-                quizPlayer2.sendResponseToClient(new Initiator(true));
+                quizPlayer1.sendResponseToClient(new Initiator(true, "Player 1"));
+                quizPlayer2.sendResponseToClient(new Initiator(true, "Player 2"));
                 state++;
                 System.out.println("testar state initial");
             }
@@ -135,7 +135,7 @@ public class GameService extends Thread {
                 }
 
                 if (msgFromClient.equalsIgnoreCase("switch") && !roundOver) {
-                    if ((totalRoundsPlayers / 2) < amountOfRounds ) {
+                    if ((totalRoundsPlayers / 2) < amountOfRounds) {
                         System.out.println(msgFromClient);
                         // Mellan lagring
                         tempPlayer = nonActivePlayer;
@@ -149,7 +149,7 @@ public class GameService extends Thread {
                 }
 
                 // om båda spelat 1 gång, ge runda resultat (DENNA HOPPAR IN NU KORREKT)
-                if(totalRoundsPlayers % 2 == 0 && roundOver) {
+                if (totalRoundsPlayers % 2 == 0 && roundOver) {
                     System.out.println("MODULUS SKIT BYTER STATE 5");
                     state = 5;
                     roundOver = false; // resetta den boolean
@@ -183,11 +183,11 @@ public class GameService extends Thread {
                 System.out.println(quizPlayer2.getTotalScore() + " Player 2 scores");
 
                 System.out.println(msgFromClient);
-                if(msgFromClient.equalsIgnoreCase("switch")) {
+                if (msgFromClient.equalsIgnoreCase("switch")) {
                     state = 6;
                 }
             }
-
+            //Test av commit
             if (state == 6) {
                 System.out.println("state 6");
                 if (amountOfRounds == (totalRoundsPlayers / 2)) {
