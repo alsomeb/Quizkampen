@@ -176,13 +176,13 @@ public class QuizGui extends JFrame implements ActionListener {
         // Scores
         JLabel resultScore = new JLabel("Player 1: " + totalEndScore.get(0) + "   -    Player 2: " + totalEndScore.get(1));
         resultScore.setPreferredSize(new Dimension(CustomSizes.width, 100));
-        resultScore.setFont(new Font("Sans-serif", Font.BOLD, 25));
+        resultScore.setFont(new Font("MONOSPACED", Font.BOLD, 25));
         resultScore.setHorizontalAlignment(JLabel.CENTER);
 
         // The winner Label
         JLabel winnerLabel = new JLabel(setWinnerText());
         winnerLabel.setHorizontalAlignment(JLabel.CENTER);
-        winnerLabel.setFont(new Font("Sans-serif", Font.BOLD, 40));
+        winnerLabel.setFont(new Font("MONOSPACED", Font.BOLD, 40));
         winnerLabel.setForeground(Color.decode("#E97777"));
 
         // EXIT GAME BUTTON
