@@ -40,9 +40,10 @@ public class Client {
                     System.out.println("All connected, game starts");
                     gui.loadWaitingRoomPanel();
                     gui.setWaitingRoomMsg("Waiting for your turn");
+                    gui.setPlayerName(initiator.playerName());
                 } else {
                     gui.loadDisconnectMsg();
-                    System.out.println("Other part Disconnected, restart this client");
+                    System.out.println("Other player Disconnected, restart this client");
                 }
             }
 
