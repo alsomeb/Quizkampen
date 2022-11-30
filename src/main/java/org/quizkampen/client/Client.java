@@ -12,7 +12,7 @@ public class Client {
     private QuizGui gui;
     private final int port = 12344;
     private Socket socket;
-    private final String serverAdress = "127.0.0.1";
+    private final String serverAdress = "192.168.1.144";
     private PrintWriter out;
     private ObjectInputStream in;
 

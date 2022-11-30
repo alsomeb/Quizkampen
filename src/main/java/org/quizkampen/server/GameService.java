@@ -150,13 +150,13 @@ public class GameService extends Thread {
 
                 // om båda spelat 1 gång, ge runda resultat (DENNA HOPPAR IN NU KORREKT)
                 if (totalRoundsPlayers % 2 == 0 && roundOver) {
-                    System.out.println("MODULUS SKIT BYTER STATE 5");
+                    System.out.println("BYTER STATE 5");
                     state = 5;
                     roundOver = false; // resetta den boolean
                 }
 
                 if ((totalRoundsPlayers / 2) == amountOfRounds) {
-                    System.out.println("Byter till state 6");
+                    System.out.println("Byter till state 5");
                     state = 5;
                 }
             }
